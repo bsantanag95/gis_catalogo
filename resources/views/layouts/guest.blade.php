@@ -23,13 +23,25 @@
 </head>
 
 <body>
-    @livewire('sidebar')
-    <div class="absolute top-4 right-4">
-        @livewire('user-menu')
-    </div>
-    <div class="font-sans text-gray-900 antialiased mt-20">
-        {{ $slot }}
-    </div>
+    <header class="sticky top-0 bg-gray-800 text-white shadow-md px-4 py-1 z-50 flex items-center justify-between min-h-[60px]">
+        <!-- Sidebar -->
+        <div>
+            @livewire('sidebar')
+        </div>
+
+        <!-- User Menu -->
+        <div class="flex-shrink-0">
+            @livewire('user-menu')
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+
+    <main class="p-6">
+        <div class="font-sans text-gray-900 antialiased mt-20">
+            {{ $slot }}
+        </div>
+    </main>
     @livewire('wire-elements-modal')
     @livewireScripts
 

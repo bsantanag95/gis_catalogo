@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class CatalogoDatatable extends DataTableComponent
 {
     protected $model = Catalogo::class;
-    public ?int $searchFilterDebounce = 400;
+    public ?int $searchFilterDebounce = 200;
     public array $perPageAccepted = [10, 25, 50, 100];
 
     protected $listeners = ['render' => 'render'];

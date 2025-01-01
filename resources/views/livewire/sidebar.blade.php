@@ -2,7 +2,7 @@
     <input type="checkbox" id="check" class="hidden" x-model="open">
 
     <!-- Botón de menú hamburguesa (abre el sidebar) -->
-    <label for="check" class="absolute top-6 left-10 cursor-pointer z-10">
+    <label for="check" class="absolute top-4 left-10 cursor-pointer z-10">
         <i class="fas fa-bars text-white bg-[#042331] text-2xl p-2 rounded-md transition"
             :class="{ 'opacity-0 pointer-events-none': open, 'left-10': !open }"></i>
     </label>
