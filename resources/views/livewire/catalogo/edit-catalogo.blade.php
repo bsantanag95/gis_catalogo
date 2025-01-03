@@ -25,29 +25,40 @@
             @error('catalogo.descripcion') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Tipo Catálogo -->
-        <div>
-            <label for="tipo_catalogo" class="block text-sm font-medium text-gray-700">Tipo Catálogo</label>
-            <input
-                type="text"
-                id="tipo_catalogo"
-                name="tipo_catalogo"
-                wire:model.defer="catalogo.tipo_catalogo"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('catalogo.tipo_catalogo') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
         <!-- Objeto EO -->
         <div>
             <label for="objeto_eo" class="block text-sm font-medium text-gray-700">Objeto EO</label>
-            <input
-                type="text"
+            <select
                 id="objeto_eo"
                 name="objeto_eo"
                 wire:model.defer="catalogo.objeto_eo"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
+                @foreach ($objetoEOOptions as $option)
+                <option value="{{ $option }}">{{ $option }}</option>
+                @endforeach
+            </select>
             @error('catalogo.objeto_eo') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
+
+        <!-- Tipo Catálogo -->
+        <div>
+            <label for="tipo_catalogo" class="block text-sm font-medium text-gray-700">Tipo Catálogo</label>
+            <select
+                id="tipo_catalogo"
+                name="tipo_catalogo"
+                wire:model.defer="catalogo.tipo_catalogo"
+                required
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
+
+                <option value="" selected disabled>Seleccionar un tipo</option>
+
+                @foreach ($tipoCatalogoOptions as $option)
+                <option value="{{ $option }}">{{ $option }}</option>
+                @endforeach
+            </select>
+            @error('catalogo.tipo_catalogo') <span class="text-red-600">{{ $message }}</span> @enderror
+        </div>
+
 
         <!-- Fases -->
         <div>
@@ -145,3 +156,44 @@
         </div>
     </form>
 </div>
+
+@script
+<script>
+    const objeto_eo = document.getElementById('objeto_eo');
+    const tipo_catalogo = document.getElementById('tipo_catalogo');
+
+    const getTipoByObjeto = {
+        'Accurate Route': ['CANALIZACION SUBTERRANEA'],
+        'Assembled equipment': ['Conector Monopolar Separable Sub', 'Protección BT Subterránea'],
+        'Cable Segment': ['TRAMO SUBTERRÁNEO'],
+        'Connector point': ['PUNTO DE UNIÓN'],
+        'Cross Arm': ['ESTRUCTURA BT DE DERIVACIÓN', 'ESTRUCTURA BT DE LÍMITE DE ZONA', 'ESTRUCTURA BT DE PASO', 'ESTRUCTURA BT DE REMATE INTERMEDIO', 'ESTRUCTURA BT DE REMATE TERMINAL', 'ESTRUCTURA DE SED AÉREA', 'ESTRUCTURA MT DE DERIVACIÓN', 'ESTRUCTURA MT DE PASO', 'ESTRUCTURA MT DE REMATE', 'ESTRUCTURA MT DE REMATE INTERMEDIO'],
+        'ETD Trafo': ['TRANSFORMADOR AÉREO', 'TRANSFORMADOR DE SUPERFICIE'],
+        'Ground': ['PARARRAYOS', 'TIERRA DE PROTECCIÓN', 'TIERRA DE SERVICIO'],
+        'Guy': ['TIRANTE A PISO', 'TIRANTE A POSTE MOZO', 'TIRANTE A RIEL'],
+        'Isolation Equipment': ['DESCONECTADOR AÉREO MT', 'PROTECCIÓN BT AÉREA', 'RECONECTADOR'],
+        'Line Segment': ['TRAMO AÉREO'],
+        'Meter': ['COMPACTO DE MEDIDA'],
+        'Pole': ['POSTE'],
+    };
+
+    const addTipoToSelect = (value) => {
+        const selectedObjeto = value;
+        const options = getTipoByObjeto[selectedObjeto] || [];
+        let optionsHTML = `<option value="" selected disabled>Seleccionar un tipo</option>`;
+        options.forEach(element => {
+            optionsHTML += `<option value="${element}">${element}</option>`;
+        });
+        tipo_catalogo.innerHTML = optionsHTML;
+    }
+
+    window.onload = () => {
+        const obj = objeto_eo.value;
+        addTipoToSelect(obj);
+    }
+
+    objeto_eo.addEventListener('change', (e) => {
+        addTipoToSelect(e.target.value);
+    });
+</script>
+@endscript

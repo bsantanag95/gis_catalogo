@@ -3,12 +3,13 @@
 namespace App\Livewire\Catalogo;
 
 use App\Models\Catalogo;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 
 class EditCatalogo extends ModalComponent
 {
     public Catalogo $catalogo;
+    public $objetoEOOptions = [];
+    public $tipoCatalogoOptions = [];
 
     protected $rules = [
         'catalogo.codigo' => 'required',
@@ -27,7 +28,51 @@ class EditCatalogo extends ModalComponent
 
     public function mount($codigo)
     {
+        $this->objetoEOOptions = [
+            'Accurate Route',
+            'Assembled equipment',
+            'Cable Segment',
+            'Connector point',
+            'Cross Arm',
+            'ETD Trafo',
+            'Ground',
+            'Guy',
+            'Isolation Equipment',
+            'Line Segment',
+            'Meter',
+            'Pole',
+        ];
         $this->catalogo = Catalogo::where('codigo', $codigo)->firstOrFail();
+        $this->updateTipoCatalogoOptions($this->catalogo->objeto_eo);
+    }
+
+    public function updatedCatalogoObjetoEo($value)
+    {
+        $this->updateTipoCatalogoOptions($value);
+    }
+
+    private function updateTipoCatalogoOptions($objetoEO)
+    {
+        $getTipoByObjeto = [
+            'Accurate Route' => ['CANALIZACION SUBTERRANEA'],
+            'Assembled equipment' => ['Conector Monopolar Separable Sub', 'Protección BT Subterránea'],
+            'Cable Segment' => ['TRAMO SUBTERRÁNEO'],
+            'Connector point' => ['PUNTO DE UNIÓN'],
+            'Cross Arm' => ['ESTRUCTURA BT DE DERIVACIÓN', 'ESTRUCTURA BT DE LÍMITE DE ZONA', 'ESTRUCTURA BT DE PASO', 'ESTRUCTURA BT DE REMATE INTERMEDIO', 'ESTRUCTURA BT DE REMATE TERMINAL', 'ESTRUCTURA DE SED AÉREA', 'ESTRUCTURA MT DE DERIVACIÓN', 'ESTRUCTURA MT DE PASO', 'ESTRUCTURA MT DE REMATE', 'ESTRUCTURA MT DE REMATE INTERMEDIO'],
+            'ETD Trafo' => ['TRANSFORMADOR AÉREO', 'TRANSFORMADOR DE SUPERFICIE'],
+            'Ground' => ['PARARRAYOS', 'TIERRA DE PROTECCIÓN', 'TIERRA DE SERVICIO'],
+            'Guy' => ['TIRANTE A PISO', 'TIRANTE A POSTE MOZO', 'TIRANTE A RIEL'],
+            'Isolation Equipment' => ['DESCONECTADOR AÉREO MT', 'PROTECCIÓN BT AÉREA', 'RECONECTADOR'],
+            'Line Segment' => ['TRAMO AÉREO'],
+            'Meter' => ['COMPACTO DE MEDIDA'],
+            'Pole' => ['POSTE'],
+        ];
+
+        $this->tipoCatalogoOptions = $getTipoByObjeto[$objetoEO] ?? [];
+
+        if (!in_array($this->catalogo->tipo_catalogo, $this->tipoCatalogoOptions)) {
+            $this->catalogo->tipo_catalogo = null;
+        }
     }
 
     public function render()

@@ -7,7 +7,9 @@ use LivewireUI\Modal\ModalComponent;
 
 class CreateCatalogo extends ModalComponent
 {
-    public $codigo, $descripcion, $tipo_catalogo, $objeto_eo, $fases, $tension, $tipo, $cudn, $detalle_fase, $cant_uucc, $estado;
+    public $objetoEOOptions = [];
+
+    public $codigo, $descripcion, $tipo_catalogo, $objeto_eo = '', $fases, $tension, $tipo, $cudn, $detalle_fase, $cant_uucc, $estado;
 
     protected $rules = [
         'catalogo.codigo' => 'required',
@@ -22,6 +24,24 @@ class CreateCatalogo extends ModalComponent
         'catalogo.cant_uucc' => 'nullable|integer|min:0',
         'catalogo.estado' => 'nullable|integer|min:0|max:1',
     ];
+
+    public function mount()
+    {
+        $this->objetoEOOptions = [
+            'Accurate Route',
+            'Assembled equipment',
+            'Cable Segment',
+            'Connector point',
+            'Cross Arm',
+            'ETD Trafo',
+            'Ground',
+            'Guy',
+            'Isolation Equipment',
+            'Line Segment',
+            'Meter',
+            'Pole',
+        ];
+    }
 
     public function render()
     {
