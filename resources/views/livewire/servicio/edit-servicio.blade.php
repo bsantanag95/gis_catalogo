@@ -1,6 +1,6 @@
 <div class="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
     <h1 class="text-2xl font-bold mb-4">Editar Servicio</h1>
-    <form wire:submits="update" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form wire:submit="update" class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Código Servicio -->
         <div>
             <label for="codigo_servicio" class="block text-sm font-medium text-gray-700">Código Servicio</label>

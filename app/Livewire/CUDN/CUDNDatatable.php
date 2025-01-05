@@ -1,51 +1,58 @@
 <?php
 
-namespace App\Livewire\CUDN;
+namespace App\Livewire\Cudn;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\CUDN;
+use Illuminate\Pagination\Paginator;
+use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
-class CUDNDatatable extends DataTableComponent
+class CudnDatatable extends Component
 {
-    protected $model = CUDN::class;
-    public ?int $searchFilterDebounce = 400;
-    public array $perPageAccepted = [10, 25, 50, 100];
+    use WithPagination, WithoutUrlPagination;
+    public $perPage = 10;
+    public $search = '';
+    public $sortField;
+    public $sortAsc = true;
 
-    protected $listeners = ['render' => 'render'];
-
-    public function configure(): void
+    public function mount()
     {
-        $this->setPrimaryKey('id');
-
-        // $this->setConfigurableAreas([
-        //     'toolbar-left-end' => 'tables.create-button'
-        // ]);
+        //
     }
 
-    public function columns(): array
+    public function render()
     {
-        return [
-            Column::make("Grupo", "grupo")
-                ->sortable()
-                ->searchable(),
-            Column::make("Correlativo", "correlativo")
-                ->sortable()
-                ->searchable(),
-            Column::make("Item", "item")
-                ->sortable()
-                ->searchable(),
-            Column::make("Sigla", "sigla")
-                ->sortable()
-                ->searchable(),
-            Column::make("Detalle", "detalle")
-                ->sortable()
-                ->searchable(),
-            Column::make("Tipo", "tipo")
-                ->sortable()
-                ->searchable(),
-            // Column::make('Acciones')
-            //     ->label(fn($row) => view('cudn.actions', ['cudn' => $row]))
-        ];
+        $cudn = CUDN::where(function ($query) {
+            $query->where('item', 'like', '%' . $this->search . '%')
+                ->orWhere('detalle', 'like', '%' . $this->search . '%');
+        })->when($this->sortField, function ($query) {
+            $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+        })->paginate($this->perPage);
+        return view('livewire.cudn.cudn-datatable', compact('cudn'));
+    }
+
+    public  function  update()
+    {
+        $currentPage = 1;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return  $currentPage;
+        });
+    }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function sortBy($field)
+    {
+        if ($this->sortField === $field) {
+            $this->sortAsc = !$this->sortAsc;
+        } else {
+            $this->sortAsc = true;
+        }
+
+        $this->sortField = $field;
     }
 }

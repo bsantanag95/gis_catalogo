@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        <div class="w-full lg:w-[95%] mx-auto p-1 overflow-x-auto">
+        <div class="w-full lg:w-[100%] mx-auto p-1 overflow-x-auto">
             @livewire('catalogo.catalogo-datatable')
         </div>
     </body>

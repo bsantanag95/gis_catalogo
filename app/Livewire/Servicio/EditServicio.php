@@ -3,7 +3,6 @@
 namespace App\Livewire\Servicio;
 
 use App\Models\UUCCServicio;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 
 class EditServicio extends ModalComponent
