@@ -26,12 +26,16 @@
         <!-- Unidad -->
         <div>
             <label for="unidad" class="block text-sm font-medium text-gray-700">Unidad</label>
-            <input
-                type="text"
+            <select
                 id="unidad"
                 name="unidad"
                 wire:model="unidad"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
+                <option value="" selected>Seleccione una unidad</option>
+                @foreach($selectUnidad as $unidad)
+                <option value="{{ $unidad }}">{{$unidad}}</option>
+                @endforeach
+            </select>
             @error('uucc.unidad') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
@@ -50,12 +54,16 @@
         <!-- Fase -->
         <div>
             <label for="fase" class="block text-sm font-medium text-gray-700">Fase</label>
-            <input
-                type="number"
+            <select
                 id="fase"
                 name="fase"
                 wire:model="fase"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
+                <option value="" selected>Seleccione una fase</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
             @error('uucc.fase') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 

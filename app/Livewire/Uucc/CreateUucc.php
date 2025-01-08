@@ -7,7 +7,7 @@ use LivewireUI\Modal\ModalComponent;
 
 class CreateUucc extends ModalComponent
 {
-    public $codigo_uucc, $descripcion, $unidad, $duracion, $fase, $norma, $clase_activo;
+    public $codigo_uucc, $descripcion, $unidad, $duracion, $fase, $norma, $clase_activo, $selectUnidad = [];
 
     protected $rules = [
         'uucc.codigo_uucc'    => 'required',
@@ -18,6 +18,11 @@ class CreateUucc extends ModalComponent
         'uucc.norma'          => 'nullable|string|max:50',
         'uucc.clase_activo'   => 'nullable|string|max:50',
     ];
+
+    public function mount()
+    {
+        $this->selectUnidad = ['C/U', 'CU', 'JGO', 'M', 'MT'];
+    }
 
     public function render()
     {

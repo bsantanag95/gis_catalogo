@@ -10,6 +10,7 @@ class EditCatalogo extends ModalComponent
     public Catalogo $catalogo;
     public $objetoEOOptions = [];
     public $tipoCatalogoOptions = [];
+    public $estado;
 
     protected $rules = [
         'catalogo.codigo' => 'required',
@@ -43,6 +44,7 @@ class EditCatalogo extends ModalComponent
             'Pole',
         ];
         $this->catalogo = Catalogo::where('codigo', $codigo)->firstOrFail();
+        $this->estado = $this->catalogo->estado;
         $this->updateTipoCatalogoOptions($this->catalogo->objeto_eo);
     }
 
@@ -83,6 +85,7 @@ class EditCatalogo extends ModalComponent
     public function update()
     {
         $this->validate();
+        $this->catalogo->estado = $this->estado;
         $this->catalogo->save();
         $this->dispatch('render')->to('Catalogo.CatalogoDatatable');
 

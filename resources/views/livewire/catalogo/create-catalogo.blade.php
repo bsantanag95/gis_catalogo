@@ -1,6 +1,6 @@
-<div class="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
-    <h1 class="text-2xl font-bold mb-4">Crear Catalogo</h1>
-    <form wire:submit="create" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="max-w-4xl mx-auto mt-4 p-4 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
+    <h1 class="text-2xl font-bold mb-4 mt-2">Crear Catalogo</h1>
+    <form wire:submit="create" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Código -->
         <div>
             <label for="codigo" class="block text-sm font-medium text-gray-700">Código</label>
@@ -49,7 +49,6 @@
                 id="tipo_catalogo"
                 name="tipo_catalogo"
                 wire:model="tipo_catalogo"
-                required
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
 
             </select>
@@ -58,12 +57,17 @@
         <!-- Fases -->
         <div>
             <label for="fases" class="block text-sm font-medium text-gray-700">Fases</label>
-            <input
-                type="number"
+            <select
                 id="fases"
                 name="fases"
                 wire:model="fases"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
+                <option value="" selected>Seleccione una fase</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
             @error('catalogo.fases') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
@@ -82,12 +86,15 @@
         <!-- Tipo -->
         <div>
             <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo</label>
-            <input
-                type="text"
+            <select
                 id="tipo"
                 name="tipo"
                 wire:model="tipo"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
+                <option value="" selected>Seleccione una fase</option>
+                <option value="AÉREO">Aéreo</option>
+                <option value="SUBTERRÁNEO">Subterráneo</option>
+            </select>
             @error('catalogo.tipo') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
@@ -128,19 +135,24 @@
         </div>
 
         <!-- Estado -->
-        <div>
-            <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
-            <input
-                type="number"
+        <div class="flex items-center">
+            <label for="estado" class="block text-sm font-medium text-gray-700 mr-4">Estado</label>
+            <button
+                type="button"
                 id="estado"
-                name="estado"
-                wire:model="estado"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('catalogo.estado') <span class="text-red-600">{{ $message }}</span> @enderror
+                wire:click="$set('estado', {{ $estado ? 0 : 1 }})"
+                class="relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none"
+                :class="{ 'bg-indigo-500': {{ $estado }}, 'bg-gray-300': !{{ $estado }} }">
+                <span
+                    class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform"
+                    :class="{ 'translate-x-6': {{ $estado }}, 'translate-x-1': !{{ $estado }} }"></span>
+            </button>
+            @error('catalogo.estado') <span class="text-red-600 ml-2">{{ $message }}</span> @enderror
         </div>
 
+
         <!-- Botones -->
-        <div class="col-span-2 flex justify-end">
+        <div class="flex justify-end">
             <button
                 type="submit"
                 class="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600"

@@ -39,26 +39,36 @@
         <!-- Unidad -->
         <div>
             <label for="unidad" class="block text-sm font-medium text-gray-700">Unidad</label>
-            <input
-                type="text"
+            <select
                 id="unidad"
                 name="unidad"
                 wire:model="unidad"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
+                <option value="" selected>Seleccione una unidad</option>
+                @foreach($selectUnidad as $unidad)
+                <option value="{{ $unidad }}">{{$unidad}}</option>
+                @endforeach
+            </select>
             @error('material.unidad') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
+
 
         <!-- UUCC -->
         <div>
             <label for="uucc" class="block text-sm font-medium text-gray-700">UUCC</label>
-            <input
-                type="number"
+            <select
                 id="uucc"
                 name="uucc"
                 wire:model="uucc"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('material.uucc') <span class="text-red-600">{{ $message }}</span> @enderror
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
+                <option value="" disabled selected>Seleccionar UUCC</option>
+                @foreach($uuccOptions as $u)
+                <option value="{{ $u->codigo_uucc }}">{{ $u->descripcion }}</option>
+                @endforeach
+            </select>
+            @error('uucc') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
+
 
         <!-- Botones -->
         <div class="col-span-2 flex justify-end">

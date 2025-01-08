@@ -3,13 +3,14 @@
 namespace App\Livewire\Catalogo;
 
 use App\Models\Catalogo;
+use App\Models\CUDN;
 use LivewireUI\Modal\ModalComponent;
 
 class CreateCatalogo extends ModalComponent
 {
     public $objetoEOOptions = [];
 
-    public $codigo, $descripcion, $tipo_catalogo, $objeto_eo = '', $fases, $tension, $tipo, $cudn, $detalle_fase, $cant_uucc, $estado;
+    public $codigo, $descripcion, $tipo_catalogo, $objeto_eo = '', $fases, $tension, $tipo, $cudn, $detalle_fase, $cant_uucc, $estado = 1;
 
     protected $rules = [
         'catalogo.codigo' => 'required',

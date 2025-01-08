@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Material;
 
+use App\Models\UUCC;
 use App\Models\UUCCMaterial;
 use LivewireUI\Modal\ModalComponent;
 
 class CreateMaterial extends ModalComponent
 {
-    public $codigo_material, $descripcion, $cantidad, $unidad, $uucc;
+    public $codigo_material, $descripcion, $cantidad, $unidad, $uucc, $selectUnidad = [], $uuccOptions = [];
 
     protected $rules = [
         'material.codigo_material' => 'required',
@@ -17,6 +18,11 @@ class CreateMaterial extends ModalComponent
         'material.uucc'            => 'nullable|integer',
     ];
 
+    public function mount()
+    {
+        $this->selectUnidad = ['Jg', 'KG', 'M', 'Pz', 'ROL', 'TR'];
+        $this->uuccOptions = UUCC::all();
+    }
     public function render()
     {
         return view('livewire.material.create-material');

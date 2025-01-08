@@ -38,7 +38,7 @@
     <!-- Contenido principal -->
 
     <main class="p-6">
-        <div class="font-sans text-gray-900 antialiased mt-8">
+        <div class="font-sans text-gray-900 antialiased mt-10">
             {{ $slot }}
         </div>
     </main>
