@@ -4,6 +4,7 @@ namespace App\Livewire\Uucc;
 
 use App\Models\UUCC;
 use LivewireUI\Modal\ModalComponent;
+use Masmerise\Toaster\Toaster;
 
 class CreateUucc extends ModalComponent
 {
@@ -33,8 +34,7 @@ class CreateUucc extends ModalComponent
     {
         UUCC::create($this->only('codigo_uucc', 'descripcion', 'unidad', 'duracion', 'fase', 'norma', 'clase_activo'));
         $this->dispatch('render')->to('Uucc.UuccDatatable');
-
-        session()->flash('message', 'El UUCC fue creado correctamente.');
+        Toaster::success('UUCC registrado existosamente');
         $this->closeModal();
     }
 }

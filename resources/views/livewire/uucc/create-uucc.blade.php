@@ -60,6 +60,7 @@
                 wire:model="fase"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
                 <option value="" selected>Seleccione una fase</option>
+                <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

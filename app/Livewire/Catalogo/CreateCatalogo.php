@@ -3,8 +3,9 @@
 namespace App\Livewire\Catalogo;
 
 use App\Models\Catalogo;
-use App\Models\CUDN;
 use LivewireUI\Modal\ModalComponent;
+use Masmerise\Toaster\Toaster;
+
 
 class CreateCatalogo extends ModalComponent
 {
@@ -54,7 +55,9 @@ class CreateCatalogo extends ModalComponent
         Catalogo::create($this->only('codigo', 'descripcion', 'tipo_catalogo', 'objeto_eo', 'fases', 'tension', 'tipo', 'cudn', 'detalle_fase', 'cant_uucc', 'estado'));
         $this->dispatch('render')->to('Catalogo.CatalogoDatatable');
 
-        session()->flash('message', 'El catalogo fue creado correctamente.');
+        //$this->dispatch('success', 'Catalogo creado existosamente');
+        Toaster::success('Catalogo creado existosamente');
+
         $this->closeModal();
     }
 }

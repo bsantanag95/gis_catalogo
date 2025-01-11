@@ -149,8 +149,6 @@
             </button>
             @error('catalogo.estado') <span class="text-red-600 ml-2">{{ $message }}</span> @enderror
         </div>
-
-
         <!-- Botones -->
         <div class="flex justify-end">
             <button
@@ -163,6 +161,7 @@
         </div>
     </form>
 </div>
+
 
 @script
 <script>
@@ -202,5 +201,13 @@
     objeto_eo.addEventListener('change', (e) => {
         addTipoToSelect(e.target.value);
     });
+    // Livewire.on('success', message => {
+    //     Swal.fire({
+    //         title: 'Éxito!',
+    //         text: message,
+    //         icon: 'success',
+    //         confirmButtonText: 'OK'
+    //     });
+    //});
 </script>
 @endscript

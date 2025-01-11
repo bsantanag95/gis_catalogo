@@ -3,11 +3,13 @@
 namespace App\Livewire\Servicio;
 
 use App\Models\UUCCServicio;
+use Exception;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
+use Masmerise\Toaster\Toaster;
 
 class ServicioDatatable extends Component
 {
@@ -17,7 +19,7 @@ class ServicioDatatable extends Component
     public $sortField;
     public $sortAsc = true;
 
-    protected $listeners = ['render' => 'render'];
+    protected $listeners = ['render' => 'render', 'delete'];
 
     public function mount()
     {
@@ -37,11 +39,20 @@ class ServicioDatatable extends Component
 
     public function delete($codigo_servicio)
     {
-        DB::table('GIS_CAT_CATALOGO_DETALLE')->where('codigo_servicio', $codigo_servicio)->delete();
+        try {
+            DB::table('GIS_CAT_CATALOGO_DETALLE')->where('codigo_servicio', $codigo_servicio)->delete();
 
-        $servicio = UUCCServicio::where('codigo_servicio', $codigo_servicio)->first();
+            $servicio = UUCCServicio::where('codigo_servicio', $codigo_servicio)->first();
 
-        $servicio->delete();
+            if ($servicio) {
+                $servicio->delete();
+                Toaster::success('El servicio fue eliminado exitosamente');
+            } else {
+                Toaster::error('Error: El registro no existe');
+            }
+        } catch (Exception $e) {
+            Toaster::error('Error: No se pudo eliminar el registro');
+        }
     }
 
     public  function  update()

@@ -1,6 +1,6 @@
 <div class="max-w-4xl mx-auto mt-4 p-4 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
     <h1 class="text-2xl font-bold mb-4 mt-2">Editar Catálogo</h1>
-    <form wire:submit="create" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <form wire:submit="update" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Código -->
         <div>
             <label for="codigo" class="block text-sm font-medium text-gray-700">Código</label>

@@ -4,6 +4,7 @@ namespace App\Livewire\Servicio;
 
 use App\Models\UUCCServicio;
 use LivewireUI\Modal\ModalComponent;
+use Masmerise\Toaster\Toaster;
 
 class EditServicio extends ModalComponent
 {
@@ -29,8 +30,8 @@ class EditServicio extends ModalComponent
         $this->validate();
         $this->servicio->save();
         $this->dispatch('render')->to('Servicio.ServicioDatatable');
+        Toaster::success('Servicio actualizado existosamente');
 
-        session()->flash('message', 'El servicio ha sido actualizado correctamente.');
         $this->closeModal();
     }
 }

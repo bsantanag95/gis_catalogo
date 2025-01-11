@@ -4,6 +4,7 @@ namespace App\Livewire\Catalogo;
 
 use App\Models\Catalogo;
 use LivewireUI\Modal\ModalComponent;
+use Masmerise\Toaster\Toaster;
 
 class EditCatalogo extends ModalComponent
 {
@@ -88,8 +89,8 @@ class EditCatalogo extends ModalComponent
         $this->catalogo->estado = $this->estado;
         $this->catalogo->save();
         $this->dispatch('render')->to('Catalogo.CatalogoDatatable');
+        Toaster::success('Catalogo actualizado existosamente');
 
-        session()->flash('message', 'El catálogo ha sido actualizado correctamente.');
         $this->closeModal();
     }
 }

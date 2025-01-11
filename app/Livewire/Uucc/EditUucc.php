@@ -5,10 +5,12 @@ namespace App\Livewire\Uucc;
 use App\Models\UUCC;
 use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
+use Masmerise\Toaster\Toaster;
 
 class EditUucc extends ModalComponent
 {
     public UUCC $uucc;
+    public $selectUnidad = [];
 
     protected $rules = [
         'uucc.codigo_uucc'    => 'required',
@@ -23,6 +25,7 @@ class EditUucc extends ModalComponent
     public function mount($codigo_uucc)
     {
         $this->uucc = UUCC::where('codigo_uucc', $codigo_uucc)->firstOrFail();
+        $this->selectUnidad = ['C/U', 'CU', 'JGO', 'M', 'MT'];
     }
 
     public function render()
@@ -35,8 +38,8 @@ class EditUucc extends ModalComponent
         $this->validate();
         $this->uucc->save();
         $this->dispatch('render')->to('Uucc.UuccDatatable');
+        Toaster::success('UUCC actualizado existosamente');
 
-        session()->flash('message', 'El UUCC ha sido actualizado correctamente.');
         $this->closeModal();
     }
 }

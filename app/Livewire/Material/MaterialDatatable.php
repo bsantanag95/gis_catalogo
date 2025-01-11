@@ -3,11 +3,13 @@
 namespace App\Livewire\Material;
 
 use App\Models\UUCCMaterial;
+use Exception;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
+use Masmerise\Toaster\Toaster;
 
 class MaterialDatatable extends Component
 {
@@ -17,7 +19,7 @@ class MaterialDatatable extends Component
     public $sortField;
     public $sortAsc = true;
 
-    protected $listeners = ['render' => 'render'];
+    protected $listeners = ['render' => 'render', 'delete'];
 
     public function mount()
     {
@@ -37,11 +39,20 @@ class MaterialDatatable extends Component
 
     public function delete($codigo_material)
     {
-        DB::table('GIS_CAT_CATALOGO_DETALLE')->where('codigo_material', $codigo_material)->delete();
+        try {
+            DB::table('GIS_CAT_CATALOGO_DETALLE')->where('codigo_material', $codigo_material)->delete();
 
-        $material = UUCCMaterial::where('codigo_material', $codigo_material)->first();
+            $material = UUCCMaterial::where('codigo_material', $codigo_material)->first();
 
-        $material->delete();
+            if ($material) {
+                $material->delete();
+                Toaster::success('El material fue eliminado exitosamente');
+            } else {
+                Toaster::error('Error: El registro no existe');
+            }
+        } catch (Exception $e) {
+            Toaster::error('Error: No se pudo eliminar el registro');
+        }
     }
 
     public  function  update()

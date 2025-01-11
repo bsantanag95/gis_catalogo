@@ -4,6 +4,7 @@ namespace App\Livewire\Servicio;
 
 use LivewireUI\Modal\ModalComponent;
 use App\Models\UUCCServicio;
+use Masmerise\Toaster\Toaster;
 
 class CreateServicio extends ModalComponent
 {
@@ -28,8 +29,8 @@ class CreateServicio extends ModalComponent
         ]);
 
         $this->dispatch('render')->to('Servicio.ServicioDatatable');
+        Toaster::success('Servicio registrado existosamente');
 
-        session()->flash('message', 'El servicio fue creado correctamente.');
         $this->closeModal();
     }
 }

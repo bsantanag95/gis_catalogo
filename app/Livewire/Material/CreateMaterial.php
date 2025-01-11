@@ -5,6 +5,7 @@ namespace App\Livewire\Material;
 use App\Models\UUCC;
 use App\Models\UUCCMaterial;
 use LivewireUI\Modal\ModalComponent;
+use Masmerise\Toaster\Toaster;
 
 class CreateMaterial extends ModalComponent
 {
@@ -39,8 +40,8 @@ class CreateMaterial extends ModalComponent
         ]);
 
         $this->dispatch('render')->to('Material.MaterialDatatable');
+        Toaster::success('Material registrado existosamente');
 
-        session()->flash('message', 'El material fue creado correctamente.');
         $this->closeModal();
     }
 }

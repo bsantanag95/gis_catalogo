@@ -233,8 +233,7 @@
                                 <i class="fas fa-edit text-lg"></i>
                             </button>
                             <button
-                                wire:confirm="¿Estas seguro que desea eliminar el registro?"
-                                wire:click="delete('{{ $catalogo->codigo }}')"
+                                wire:click="$dispatch('deleteCatalogo', { codigo: '{{ $catalogo->codigo }}'})"
                                 class="text-red-500 hover:text-red-700 ml-2 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
                                 title="Eliminar">
                                 <i class="fas fa-trash text-lg"></i>
@@ -256,3 +255,28 @@
     <div class="px-6 py-3">{{ $catalogos->links(data: ['scrollTo' => false]) }}</div>
 </div>
 </div>
+
+@script
+<script>
+    Livewire.on('deleteCatalogo', codigo => {
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "El registro se eliminará para siempre",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, elimínalo"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Livewire.dispatch('delete', codigo)
+                // Swal.fire({
+                //     title: "Eliminado",
+                //     text: "El registro fue eliminado",
+                //     icon: "success"
+                // });
+            }
+        });
+    })
+</script>
+@endscript

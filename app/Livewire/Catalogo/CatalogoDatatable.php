@@ -3,11 +3,13 @@
 namespace App\Livewire\Catalogo;
 
 use App\Models\Catalogo;
+use Exception;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
+use Masmerise\Toaster\Toaster;
 
 class CatalogoDatatable extends Component
 {
@@ -17,7 +19,7 @@ class CatalogoDatatable extends Component
     public $sortField;
     public $sortAsc = true;
 
-    protected $listeners = ['render' => 'render'];
+    protected $listeners = ['render' => 'render', 'delete'];
 
     public function mount()
     {
@@ -66,10 +68,19 @@ class CatalogoDatatable extends Component
 
     public function delete($codigo)
     {
-        DB::table('GIS_CAT_CATALOGO_DETALLE')->where('codigo_cat', $codigo)->delete();
+        try {
+            DB::table('GIS_CAT_CATALOGO_DETALLE')->where('codigo_cat', $codigo)->delete();
 
-        $catalogo = Catalogo::where('codigo', $codigo)->first();
+            $catalogo = Catalogo::where('codigo', $codigo)->first();
 
-        $catalogo->delete();
+            if ($catalogo) {
+                $catalogo->delete();
+                Toaster::success('El catálogo fue eliminado exitosamente');
+            } else {
+                Toaster::error('Error: El registro no existe');
+            }
+        } catch (Exception $e) {
+            Toaster::error('Error: No se pudo eliminar el registro');
+        }
     }
 }
