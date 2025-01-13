@@ -76,28 +76,6 @@
                                 :sortAsc="$sortAsc" />
                         </button>
                     </th>
-                    <!-- Columna para fases -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
-                        <button wire:click="sortBy('fases')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Fases</span>
-                            <x-sort-icon
-                                field="fases"
-                                :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
-                        </button>
-                    </th>
-                    <!-- Columna para tensión -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
-                        <button wire:click="sortBy('tension')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Tensión</span>
-                            <x-sort-icon
-                                field="tension"
-                                :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
-                        </button>
-                    </th>
                     <!-- Columna para el tipo -->
                     <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
                         <button wire:click="sortBy('tipo')"
@@ -109,39 +87,7 @@
                                 :sortAsc="$sortAsc" />
                         </button>
                     </th>
-                    <!-- Columna para el CUDN -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
-                        <button wire:click="sortBy('cudn')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>CUDN</span>
-                            <x-sort-icon
-                                field="cudn"
-                                :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
-                        </button>
-                    </th>
-                    <!-- Columna para el detalle fase -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
-                        <button wire:click="sortBy('detalle_fase')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Det. Fase</span>
-                            <x-sort-icon
-                                field="detalle_fase"
-                                :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
-                        </button>
-                    </th>
-                    <!-- Columna para cantidad uucc -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
-                        <button wire:click="sortBy('cant_uucc')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Cant. UUCC</span>
-                            <x-sort-icon
-                                field="cant_uucc"
-                                :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
-                        </button>
-                    </th>
+
                     <!-- Columna para el estado -->
                     <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
                         <button wire:click="sortBy('estado')"
@@ -172,12 +118,12 @@
                     </td>
                     <td class="px-6 py-4" title="{{ $catalogo->descripcion }}">
                         <div class="text-sm">
-                            <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->descripcion}}</div>
+                            <div class="text-xs line-clamp-1 max-w-[200px]">{{$catalogo->descripcion}}</div>
                         </div>
                     </td>
                     <td class="px-6 py-4" title="{{ $catalogo->tipo_catalogo }}">
                         <div class="text-sm">
-                            <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->tipo_catalogo}}</div>
+                            <div class="text-xs line-clamp-1 max-w-[200px]">{{$catalogo->tipo_catalogo}}</div>
                         </div>
                     </td>
                     <td class="px-6 py-4" title="{{ $catalogo->objeto_eo }}">
@@ -185,36 +131,13 @@
                             <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->objeto_eo}}</div>
                         </div>
                     </td>
-                    <td class="px-6 py-4">
-                        <div class="text-sm">
-                            <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->fases}}</div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="text-sm">
-                            <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->tension}}</div>
-                        </div>
-                    </td>
+
                     <td class="px-6 py-4" title="{{ $catalogo->tipo }}">
                         <div class="text-sm">
                             <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->tipo}}</div>
                         </div>
                     </td>
-                    <td class="px-6 py-4" title="{{ $catalogo->cudn }}">
-                        <div class="text-sm">
-                            <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->cudn}}</div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4" title="{{ $catalogo->detalle_fase }}">
-                        <div class="text-sm">
-                            <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->detalle_fase}}</div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="text-sm">
-                            <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->cant_uucc}}</div>
-                        </div>
-                    </td>
+
                     @if($catalogo->estado == 1)
                     <td class="px-4 py-3 text-xs border">
                         <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Activo </span>
@@ -225,7 +148,13 @@
                     </td>
                     @endif
                     <td class="px-6 py-4">
-                        <div class="flex justify-end gap-4">
+                        <div class="flex justify-end gap-1">
+                            <button
+                                wire:click="$dispatch('openModal', { component: 'catalogo.view-catalogo', arguments: { codigo: '{{ $catalogo->codigo }}' }})"
+                                class="text-gray-500 hover:text-gray-700 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
+                                title="Ver">
+                                <i class="fas fa-eye"></i>
+                            </button>
                             <button
                                 wire:click="$dispatch('openModal', { component: 'catalogo.edit-catalogo', arguments: { codigo: '{{ $catalogo->codigo }}' }})"
                                 class="text-blue-500 hover:text-blue-700 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
@@ -234,7 +163,7 @@
                             </button>
                             <button
                                 wire:click="$dispatch('deleteCatalogo', { codigo: '{{ $catalogo->codigo }}'})"
-                                class="text-red-500 hover:text-red-700 ml-2 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
+                                class="text-red-500 hover:text-red-700 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
                                 title="Eliminar">
                                 <i class="fas fa-trash text-lg"></i>
                             </button>
