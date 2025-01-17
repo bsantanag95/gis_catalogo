@@ -65,9 +65,9 @@
         <div class="flex items-start">
             <x-label class="font-semibold text-gray-700 min-w-[120px]">Estado</x-label>
             @if ($catalogo['estado'] == "1")
-            <span class="px-2 py-1 text-xs font-medium text-green-700 bg-green-100 rounded">Activo</span>
+            <x-label class="text-gray-900">: Activo</x-label>
             @else
-            <span class="px-2 py-1 text-xs font-medium text-red-700 bg-red-100 rounded">Inactivo</span>
+            <x-label class="text-gray-900">: Inactivo</x-label>
             @endif
         </div>
     </div>
