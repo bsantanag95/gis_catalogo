@@ -31,9 +31,9 @@ class CreateDetalle extends ModalComponent
     public function create()
     {
         $validate = $this->validate([
-            'codigo_cat' => 'required|integer',
+            'codigo_cat' => 'required|string',
             'codigo_uucc' => 'required|integer',
-            'codigo_material' => 'required|integer',
+            'codigo_material' => 'required|string',
             'codigo_servicio' => 'required|integer',
         ]);
 
