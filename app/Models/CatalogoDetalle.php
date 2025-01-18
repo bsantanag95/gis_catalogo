@@ -9,6 +9,8 @@ class CatalogoDetalle extends Model
     protected $table = 'GIS_CAT_CATALOGO_DETALLE';
     public $timestamps = false;
 
+    protected $guarded = ['id'];
+
     public function catalogo()
     {
         return $this->belongsTo(Catalogo::class, 'codigo_cat', 'codigo');
