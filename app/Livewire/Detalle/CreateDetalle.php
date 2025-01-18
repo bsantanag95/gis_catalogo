@@ -7,7 +7,6 @@ use App\Models\CatalogoDetalle;
 use App\Models\UUCC;
 use App\Models\UUCCMaterial;
 use App\Models\UUCCServicio;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 use Masmerise\Toaster\Toaster;
 
@@ -15,13 +14,6 @@ class CreateDetalle extends ModalComponent
 {
     public $catalogoOptions = [], $uuccOptions = [], $materialOptions = [], $servicioOptions = [];
     public $codigo_cat = "", $codigo_uucc = "", $codigo_material = "", $codigo_servicio = "";
-
-    protected $rules = [
-        'catalogo_detalle.codigo_cat' => 'required|integer',
-        'catalogo_detalle.codigo_uucc' => 'required|integer',
-        'catalogo_detalle.codigo_material' => 'required|integer',
-        'catalogo_detalle.codigo_servicio' => 'required|integer',
-    ];
 
     public function mount()
     {
