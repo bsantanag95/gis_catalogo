@@ -60,6 +60,29 @@
                     <i class="fa fa-briefcase mr-4"></i> Servicios
                 </a>
             </li>
+            <li class="relative group">
+                <a href="#"
+                    class="flex items-center justify-between px-6 py-3 text-white text-sm leading-[55px] border-t border-b border-black/10 hover:pl-12 transition-all">
+                    <span>
+                        <i class="fas fa-handshake mr-4"></i> Transacciones
+                    </span>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                <ul class="absolute top-0 left-full hidden bg-[#042331] group-hover:block shadow-lg min-w-[200px]">
+                    <li>
+                        <a href="/detalle-catalogo"
+                            class="block py-2 px-4 transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-white">
+                            Detalle de Catalogo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/catalogo-uucc"
+                            class="block py-2 px-4 transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-white">
+                            Catalogo-UUCC
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </div>
