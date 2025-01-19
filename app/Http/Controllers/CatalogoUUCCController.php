@@ -8,6 +8,6 @@ class CatalogoUUCCController extends Controller
 {
     public function index()
     {
-        return view('catalogo.index');
+        return view('catalogo-uucc.index');
     }
 }
