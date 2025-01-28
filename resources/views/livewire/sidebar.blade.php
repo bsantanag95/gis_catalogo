@@ -1,10 +1,9 @@
-<div x-data="{ open: false }" class="fixed top-0 left-0 h-full z-30">
+<div x-data="{ open: false }" class="relative">
     <input type="checkbox" id="check" class="hidden" x-model="open">
 
-    <!-- Botón de menú hamburguesa (abre el sidebar) -->
-    <label for="check" class="absolute top-4 left-4 cursor-pointer z-30">
-        <i class="fas fa-bars text-white bg-[#042331] text-xl p-3 rounded-lg shadow-lg transition-all duration-300"
-            :class="{ 'opacity-0 pointer-events-none': open, 'left-4': !open }"></i>
+    <!-- Botón de menú hamburguesa -->
+    <label for="check" class="p-2 rounded-md hover:bg-gray-700 transition cursor-pointer flex items-center" aria-label="Toggle Sidebar">
+        <i class="fas fa-bars text-xl"></i>
     </label>
 
     <!-- Sidebar -->

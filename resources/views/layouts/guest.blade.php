@@ -25,17 +25,7 @@
 </head>
 
 <body>
-    <header class="sticky top-0 bg-gray-800 text-white shadow-md px-4 py-1 z-50 flex items-center justify-between min-h-[60px]">
-        <!-- Sidebar -->
-        <div>
-            @livewire('sidebar')
-        </div>
-
-        <!-- User Menu -->
-        <div class="flex-shrink-0">
-            @livewire('user-menu')
-        </div>
-    </header>
+    @livewire('header')
 
     <!-- Contenido principal -->
 
