@@ -1,5 +1,7 @@
 <div class="p-4">
-    <h1 class="text-xl font-bold mb-4">DETALLE</h1>
+    <div class="pb-4 border-b border-gray-200 mb-6">
+        <h1 class="text-xl font-semibold text-gray-800">Detalle del Catálogo</h1>
+    </div>
     <div class="space-y-3">
         <!-- Código -->
         <div class="flex items-start">

@@ -1,5 +1,7 @@
 <div class="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-md rounded-lg">
-    <h1 class="text-2xl font-bold mb-4">Editar UUCC</h1>
+    <div class="pb-4 border-b border-gray-200 mb-6">
+        <h1 class="text-xl font-semibold text-gray-800">Editar UUCC</h1>
+    </div>
     <form wire:submit="update" class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
             <label for="codigo_uucc" class="block text-sm font-medium text-gray-700">Código UUCC</label>

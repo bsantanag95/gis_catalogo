@@ -1,5 +1,7 @@
 <div class="max-w-4xl mx-auto mt-4 p-4 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
-    <h1 class="text-2xl font-bold mb-4 mt-2">Crear Catalogo</h1>
+    <div class="pb-4 border-b border-gray-200 mb-6">
+        <h1 class="text-xl font-semibold text-gray-800">Nuevo Catálogo</h1>
+    </div>
     <form wire:submit="create" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Código -->
         <div>
@@ -50,7 +52,6 @@
                 name="tipo_catalogo"
                 wire:model="tipo_catalogo"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
-
             </select>
             @error('catalogo.tipo_catalogo') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
@@ -201,13 +202,5 @@
     objeto_eo.addEventListener('change', (e) => {
         addTipoToSelect(e.target.value);
     });
-    // Livewire.on('success', message => {
-    //     Swal.fire({
-    //         title: 'Éxito!',
-    //         text: message,
-    //         icon: 'success',
-    //         confirmButtonText: 'OK'
-    //     });
-    //});
 </script>
 @endscript
