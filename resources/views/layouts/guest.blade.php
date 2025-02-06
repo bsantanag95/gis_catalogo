@@ -25,7 +25,9 @@
 </head>
 
 <body>
+    @if (!request()->routeIs('login'))
     @livewire('header')
+    @endif
 
     <!-- Contenido principal -->
 

@@ -16,7 +16,7 @@
             @csrf
 
             <div>
-                <x-label value="Username" />
+                <x-label value="{{ __('User') }}" />
                 <x-input
                     class="block w-full mt-1"
                     type="text"
