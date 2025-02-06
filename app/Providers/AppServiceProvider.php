@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\Auth;
@@ -29,5 +30,7 @@ class AppServiceProvider extends ServiceProvider
 
             return $validated ? Auth::getLastAttempted() : null;
         });
+
+        RedirectIfAuthenticated::redirectUsing(fn() => route('catalogo.index'));
     }
 }
