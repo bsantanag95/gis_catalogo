@@ -11,6 +11,7 @@
 
                 <input id="search" wire:model.live.debounce.100ms="search" type="text" placeholder="Buscar UUCC" class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
             </div>
+            @auth
             <div>
                 <button
                     wire:click="$dispatch('openModal', { component: 'uucc.create-uucc' })"
@@ -21,6 +22,7 @@
                     Crear Nuevo
                 </button>
             </div>
+            @endauth
         </div>
         <!-- Selector de registros por página -->
         <div>
@@ -114,10 +116,11 @@
                                 :sortAsc="$sortAsc" />
                         </button>
                     </th>
-                    <!-- Columna para las acciones -->
+                    @auth
                     <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-center text-xs leading-4uppercase tracking-wider">
                         Acciones
                     </th>
+                    @endauth
                 </tr>
             </thead>
 
@@ -159,6 +162,7 @@
                             <div class="font-medium">{{$u->clase_activo}}</div>
                         </div>
                     </td>
+                    @auth
                     <td class="px-6 py-4">
                         <div class="flex justify-end gap-4">
                             <button
@@ -175,6 +179,7 @@
                             </button>
                         </div>
                     </td>
+                    @endauth
                 </tr>
                 @endforeach
                 @if ($uucc->isEmpty())

@@ -13,6 +13,7 @@
             </div>
 
             <!-- Botón Crear Nuevo -->
+            @auth
             <div>
                 <button
                     wire:click="$dispatch('openModal', { component: 'servicio.create-servicio' })"
@@ -23,6 +24,7 @@
                     Crear Nuevo
                 </button>
             </div>
+            @endauth
         </div>
 
         <!-- Selector de registros por página -->
@@ -63,11 +65,12 @@
                                 :sortAsc="$sortAsc" />
                         </button>
                     </th>
-
+                    @auth
                     <!-- Columna para las acciones -->
                     <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-center text-xs leading-4uppercase tracking-wider">
                         Acciones
                     </th>
+                    @endauth
                 </tr>
             </thead>
 
@@ -84,6 +87,7 @@
                             <div class="font-medium">{{$servicio->descripcion}}</div>
                         </div>
                     </td>
+                    @auth
                     <td class="px-6 py-4">
                         <div class="flex justify-end gap-4">
                             <button
@@ -100,6 +104,7 @@
                             </button>
                         </div>
                     </td>
+                    @endauth
                 </tr>
                 @endforeach
                 @if ($servicios->isEmpty())
