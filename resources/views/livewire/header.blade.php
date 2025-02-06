@@ -7,27 +7,42 @@
         </span>
     </div>
 
-    <!-- Navigation Links (Optional) -->
+    <!-- Navigation Links (Optional) 
     <nav class="hidden md:flex space-x-6">
         <a href="#" class="text-sm font-medium hover:text-gray-300 transition">Home</a>
         <a href="#" class="text-sm font-medium hover:text-gray-300 transition">Features</a>
         <a href="#" class="text-sm font-medium hover:text-gray-300 transition">About</a>
-    </nav>
-
+    </nav>-->
     <!-- User Menu -->
     <div class="relative flex items-center">
-        <div class="mr-4">
-            <!-- Notification Icon -->
-            <button class="p-2 rounded-full hover:bg-gray-700 transition relative" aria-label="Notifications">
-                <i class="fas fa-bell text-lg"></i>
-                <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full ring-2 ring-gray-800"></span>
-            </button>
+        @auth
+        <div class="mr-4"></div>
+        <!-- User Dropdown -->
+        <div x-data="{ open: false }" class="relative">
+            <div @click="open = !open" class="flex items-center space-x-2 cursor-pointer">
+                <img src="{{ asset('user_avatar.png') }}"
+                    alt="User Avatar"
+                    class="w-8 h-8 rounded-full border-2 border-gray-700 transition">
+                <span class="hidden md:block text-sm font-medium">{{ Auth::user()->username }}</span>
+                <i class="fas fa-chevron-down transition-transform duration-200 ease-in-out"
+                    :class="open ? 'rotate-180' : 'rotate-0'"></i>
+            </div>
+            <!-- Dropdown Menu -->
+            <div x-show="open" @click.away="open = false"
+                class="absolute right-0 mt-2 w-48 bg-gray-800 text-white rounded-md shadow-lg overflow-hidden z-50">
+                <form method="POST" action="{{ route('logout') }}" class="w-full">
+                    @csrf
+                    <button type="submit" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-700 transition">
+                        Cerrar sesión
+                    </button>
+                </form>
+            </div>
         </div>
-        <!-- User Avatar -->
-        <div class="flex items-center space-x-2 cursor-pointer group">
-            <img src="https://via.placeholder.com/32" alt="User Avatar" class="w-8 h-8 rounded-full border-2 border-gray-700 group-hover:border-white transition">
-            <span class="hidden md:block text-sm font-medium">John Doe</span>
-            <i class="fas fa-chevron-down text-sm transition group-hover:rotate-180"></i>
-        </div>
+        @endauth
+        @guest
+        <a href="/login" class="text-sm font-medium hover:text-gray-300 transition px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600">
+            Iniciar sesión
+        </a>
+        @endguest
     </div>
 </header>
