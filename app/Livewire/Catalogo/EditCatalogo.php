@@ -23,7 +23,7 @@ class EditCatalogo extends ModalComponent
         'catalogo.tipo' => 'nullable|string|max:50',
         'catalogo.cudn' => 'nullable|string|max:50',
         'catalogo.detalle_fase' => 'nullable|string|max:50',
-        'catalogo.cant_uucc' => 'nullable|integer|min:0',
+        'catalogo.cant_uucc' => 'nullable|integer|min:0|max:9999',
         'catalogo.estado' => 'nullable|integer|min:0|max:1',
     ];
 

@@ -15,7 +15,7 @@ class EditMaterial extends ModalComponent
     protected $rules = [
         'material.codigo_material' => 'required',
         'material.descripcion'     => 'nullable|string|max:100',
-        'material.cantidad'        => 'nullable|numeric|min:0|max:999999999999.99999',
+        'material.cantidad'        => 'nullable|numeric|min:0|max:9999',
         'material.unidad'          => 'nullable|string|max:50',
         'material.uucc'            => 'nullable|integer',
     ];

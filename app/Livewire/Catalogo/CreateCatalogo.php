@@ -23,7 +23,7 @@ class CreateCatalogo extends ModalComponent
         'tipo' => 'nullable|string|max:50',
         'cudn' => 'nullable|string|max:50',
         'detalle_fase' => 'nullable|string|max:50',
-        'cant_uucc' => 'nullable|integer|min:0',
+        'cant_uucc' => 'nullable|integer|min:0|max:9999',
         'estado' => 'nullable|integer|min:0|max:1',
     ];
 

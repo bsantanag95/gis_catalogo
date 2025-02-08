@@ -14,7 +14,7 @@ class CreateMaterial extends ModalComponent
     protected $rules = [
         'codigo_material' => 'required|string|max:100',
         'descripcion'     => 'nullable|string|max:100',
-        'cantidad'        => 'nullable|numeric|min:0|max:999999999999.99999',
+        'cantidad'        => 'nullable|numeric|min:0|max:9999',
         'unidad'          => 'nullable|string|max:50',
         'uucc'            => 'nullable|integer',
     ];
