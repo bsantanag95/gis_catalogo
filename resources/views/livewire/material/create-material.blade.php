@@ -12,6 +12,7 @@
                 wire:model.defer="codigo_material"
                 required
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+            @error('codigo_material') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
         <!-- Descripción -->
         <div>
@@ -22,7 +23,7 @@
                 name="descripcion"
                 wire:model="descripcion"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('material.descripcion') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('descripcion') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Cantidad -->
@@ -30,12 +31,14 @@
             <label for="cantidad" class="block text-sm font-medium text-gray-700">Cantidad</label>
             <input
                 type="number"
-                step="0.00001"
+                step="0.01"
+                min="0"
                 id="cantidad"
                 name="cantidad"
                 wire:model="cantidad"
+                onkeydown="if(['e', 'E', '-'].includes(event.key)) event.preventDefault();"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('material.cantidad') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('cantidad') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Unidad -->
@@ -51,7 +54,7 @@
                 <option value="{{ $unidad }}">{{$unidad}}</option>
                 @endforeach
             </select>
-            @error('material.unidad') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('unidad') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
 

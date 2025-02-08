@@ -29,7 +29,7 @@ class CreateCatalogoUucc extends ModalComponent
         $validatedData = $this->validate([
             'codigo_cat' => 'required|string',
             'uucc' => 'required|integer',
-            'cantidad' => 'nullable|integer'
+            'cantidad' => 'nullable|integer|min:0'
         ]);
 
         CatalogoUUCC::create([

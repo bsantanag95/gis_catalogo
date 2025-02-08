@@ -8,11 +8,13 @@
             <label for="codigo_servicio" class="block text-sm font-medium text-gray-700">Código Servicio</label>
             <input
                 type="number"
+                min="0"
                 id="codigo_servicio"
                 name="codigo_servicio"
                 wire:model="codigo_servicio"
                 required
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200"" />
+                @error('codigo_servicio') <span class=" text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Descripción -->
@@ -25,7 +27,7 @@
                 wire:model="descripcion"
                 required
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('servicio.descripcion') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('descripcion') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Botones -->

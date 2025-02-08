@@ -12,11 +12,11 @@ class CreateMaterial extends ModalComponent
     public $codigo_material, $descripcion, $cantidad, $unidad, $uucc, $selectUnidad = [], $uuccOptions = [];
 
     protected $rules = [
-        'material.codigo_material' => 'required',
-        'material.descripcion'     => 'nullable|string|max:100',
-        'material.cantidad'        => 'nullable|numeric|min:0|max:999999999999.99999',
-        'material.unidad'          => 'nullable|string|max:50',
-        'material.uucc'            => 'nullable|integer',
+        'codigo_material' => 'required|string|max:100',
+        'descripcion'     => 'nullable|string|max:100',
+        'cantidad'        => 'nullable|numeric|min:0|max:999999999999.99999',
+        'unidad'          => 'nullable|string|max:50',
+        'uucc'            => 'nullable|integer',
     ];
 
     public function mount()
@@ -31,6 +31,7 @@ class CreateMaterial extends ModalComponent
 
     public function create()
     {
+        $this->validate();
         UUCCMaterial::create([
             'codigo_material' => $this->codigo_material,
             'descripcion' => $this->descripcion,

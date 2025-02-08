@@ -133,6 +133,8 @@
                 id="cant_uucc"
                 name="cant_uucc"
                 wire:model.defer="catalogo.cant_uucc"
+                min="0"
+                onkeydown="if(event.key === 'e' || event.key === 'E' || event.key === '-') event.preventDefault();"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
             @error('catalogo.cant_uucc') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>

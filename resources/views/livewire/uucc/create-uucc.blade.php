@@ -10,8 +10,11 @@
                 id="codigo_uucc"
                 name="codigo_uucc"
                 wire:model="codigo_uucc"
+                min="0"
+                onkeydown="if(event.key === 'e' || event.key === 'E' || event.key === '-') event.preventDefault();"
                 required
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+            @error('codigo_uucc') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
         <!-- Descripción -->
         <div>
@@ -22,7 +25,7 @@
                 name="descripcion"
                 wire:model="descripcion"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('uucc.descripcion') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('descripcion') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Unidad -->
@@ -38,7 +41,7 @@
                 <option value="{{ $unidad }}">{{$unidad}}</option>
                 @endforeach
             </select>
-            @error('uucc.unidad') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('unidad') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Duración -->
@@ -50,7 +53,7 @@
                 name="duracion"
                 wire:model="duracion"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('uucc.duracion') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('duracion') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Fase -->
@@ -67,7 +70,7 @@
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select>
-            @error('uucc.fase') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('fase') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Norma -->
@@ -79,7 +82,7 @@
                 name="norma"
                 wire:model="norma"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('uucc.norma') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('norma') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Clase Activo -->
@@ -91,7 +94,7 @@
                 name="clase_activo"
                 wire:model="clase_activo"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('uucc.clase_activo') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('clase_activo') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Botones -->

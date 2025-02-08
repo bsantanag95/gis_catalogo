@@ -31,9 +31,11 @@
             <input
                 type="number"
                 step="0.00001"
+                min="0"
                 id="cantidad"
                 name="cantidad"
                 wire:model.defer="material.cantidad"
+                onkeydown="if(['e', 'E', '-'].includes(event.key)) event.preventDefault();"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
             @error('material.cantidad') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>

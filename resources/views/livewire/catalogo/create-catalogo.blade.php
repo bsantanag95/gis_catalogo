@@ -13,8 +13,8 @@
                 wire:model="codigo"
                 required
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+            @error('codigo') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
-
         <!-- Descripción -->
         <div>
             <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
@@ -24,7 +24,7 @@
                 name="descripcion"
                 wire:model="descripcion"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('catalogo.descripcion') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('descripcion') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Objeto EO -->
@@ -40,7 +40,7 @@
                 <option value="{{ $option }}">{{ $option }}</option>
                 @endforeach
             </select>
-            @error('catalogo.objeto_eo') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('objeto_eo') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
 
@@ -53,7 +53,7 @@
                 wire:model="tipo_catalogo"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200">
             </select>
-            @error('catalogo.tipo_catalogo') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('tipo_catalogo') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
         <!-- Fases -->
         <div>
@@ -69,7 +69,7 @@
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select>
-            @error('catalogo.fases') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('fases') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Tensión -->
@@ -81,7 +81,7 @@
                 name="tension"
                 wire:model="tension"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('catalogo.tension') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('tension') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Tipo -->
@@ -96,7 +96,7 @@
                 <option value="AÉREO">Aéreo</option>
                 <option value="SUBTERRÁNEO">Subterráneo</option>
             </select>
-            @error('catalogo.tipo') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('tipo') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- CUDN -->
@@ -108,7 +108,7 @@
                 name="cudn"
                 wire:model="cudn"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('catalogo.cudn') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('cudn') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Detalle Fase -->
@@ -120,7 +120,7 @@
                 name="detalle_fase"
                 wire:model="detalle_fase"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('catalogo.detalle_fase') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('detalle_fase') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <!-- Cantidad UUCC -->
@@ -131,9 +131,12 @@
                 id="cant_uucc"
                 name="cant_uucc"
                 wire:model="cant_uucc"
+                min="0"
+                onkeydown="if(event.key === 'e' || event.key === 'E' || event.key === '-') event.preventDefault();"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('catalogo.cant_uucc') <span class="text-red-600">{{ $message }}</span> @enderror
+            @error('cant_uucc') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
+
 
         <!-- Estado -->
         <div class="flex items-center">
@@ -148,7 +151,7 @@
                     class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform"
                     :class="{ 'translate-x-6': {{ $estado }}, 'translate-x-1': !{{ $estado }} }"></span>
             </button>
-            @error('catalogo.estado') <span class="text-red-600 ml-2">{{ $message }}</span> @enderror
+            @error('estado') <span class="text-red-600 ml-2">{{ $message }}</span> @enderror
         </div>
         <!-- Botones -->
         <div class="flex justify-end">
