@@ -24,14 +24,14 @@
     @livewireStyles
 </head>
 
-<body>
+<body class="@if(request()->routeIs('login')) bg-gradient-to-br from-gray-900 to-gray-800 @else bg-white @endif">
     @if (!request()->routeIs('login'))
     @livewire('header')
     @endif
 
     <!-- Contenido principal -->
 
-    <main class="p-6">
+    <main class="p-0">
         <div class="font-sans text-gray-900 antialiased mt-10">
             {{ $slot }}
         </div>
