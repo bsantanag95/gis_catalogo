@@ -17,4 +17,9 @@ class UUCCMaterial extends Model
     {
         return $this->hasMany(CatalogoDetalle::class, 'codigo_material', 'codigo_material');
     }
+
+    public function uuccRelacion()
+    {
+        return $this->belongsTo(UUCC::class, 'uucc', 'codigo_uucc');
+    }
 }

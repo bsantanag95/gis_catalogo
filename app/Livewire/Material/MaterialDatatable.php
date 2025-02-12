@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Material;
 
+use App\Models\UUCC;
 use App\Models\UUCCMaterial;
 use Exception;
 use Illuminate\Pagination\Paginator;
@@ -18,8 +19,15 @@ class MaterialDatatable extends Component
     public $search = '';
     public $sortField;
     public $sortAsc = true;
+    public $modalAbierto = false;
+    public $uuccSeleccionado = [];
 
     protected $listeners = ['render' => 'render', 'delete'];
+
+    public function cerrarModal()
+    {
+        $this->modalAbierto = false;
+    }
 
     public function mount()
     {
@@ -53,6 +61,13 @@ class MaterialDatatable extends Component
         } catch (Exception $e) {
             Toaster::error('Error: No se pudo eliminar el registro');
         }
+    }
+
+    public function mostrarUUCC($codigo)
+    {
+        $uucc = UUCC::where('codigo_uucc', $codigo)->first();
+        $this->uuccSeleccionado = $uucc ? $uucc->toArray() : [];
+        $this->modalAbierto = true;
     }
 
     public  function  update()

@@ -1,21 +1,27 @@
 <div>
-    <div class="flex justify-between items-center mb-4">
-        <div class="flex items-center space-x-4 mt-4 md:mt-0">
+    <!-- Header con controles -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-4 p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+        <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
             <!-- Buscador -->
-            <div class="relative flex items-center">
-                <span class="absolute">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-3 text-gray-400 dark:text-gray-600">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            <div class="relative w-full md:w-80">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
-                </span>
-                <input id="search" wire:model.live.debounce.100ms="search" type="text" placeholder="Buscar material" class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                </div>
+                <input
+                    id="search"
+                    wire:model.live.debounce.100ms="search"
+                    type="text"
+                    placeholder="Buscar material"
+                    class="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
             </div>
-            <!-- Botón Crear Nuevo -->
+
             @auth
             <div>
                 <button
-                    wire:click="$dispatch('openModal', { component: 'material.create-material' })"
-                    class="inline-flex justify-center px-4 py-2 w-full text-sm font-medium text-gray-700 bg-white rounded-md border border-gray-300 shadow-sm hover:bg-gray-50 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600">
+                    wire:click="$dispatch('openModal', { component: 'servicio.create-servicio' })"
+                    class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-md border border-gray-300 shadow-sm hover:bg-gray-50 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600">
                     <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
@@ -24,9 +30,13 @@
             </div>
             @endauth
         </div>
-        <!-- Selector de registros por página -->
-        <div>
-            <select id="perPage" wire:change='update' wire:model="perPage" class="bg-gray-50 border w-16 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+        <div class="mt-4 md:mt-0 relative">
+            <select
+                id="perPage"
+                wire:change='update'
+                wire:model="perPage"
+                class="bg-white border border-gray-300 text-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block pr-8 pl-3 py-2.5 shadow-sm appearance-none w-20">
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
@@ -34,116 +44,61 @@
             </select>
         </div>
     </div>
-    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
-        <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+
+    <!-- Tabla -->
+    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-4">
+        <table class="w-full border-collapse bg-white text-gray-700">
             <thead class="bg-gray-50">
                 <tr>
-                    <!-- Columna para el código -->
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        <button wire:click="sortBy('codigo_material')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Código</span>
+                    @foreach(['codigo_material', 'descripcion', 'cantidad', 'unidad', 'uucc'] as $field)
+                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                        <button
+                            wire:click="sortBy('{{ $field }}')"
+                            class="flex items-center gap-1 hover:text-indigo-600 transition-colors">
+                            {{ ucfirst(str_replace('_', ' ', $field)) }}
                             <x-sort-icon
-                                field="codigo_material"
+                                field="{{ $field }}"
                                 :sortField="$sortField"
                                 :sortAsc="$sortAsc" />
                         </button>
                     </th>
-
-                    <!-- Columna para la descripción -->
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        <button wire:click="sortBy('descripcion')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Descripción</span>
-                            <x-sort-icon
-                                field="descripcion"
-                                :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
-                        </button>
-                    </th>
-                    <!-- Columna para la cantidad -->
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        <button wire:click="sortBy('cantidad')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Cantidad</span>
-                            <x-sort-icon
-                                field="cantidad"
-                                :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
-                        </button>
-                    </th>
-                    <!-- Columna para la unidad -->
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        <button wire:click="sortBy('unidad')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Unidad</span>
-                            <x-sort-icon
-                                field="unidad"
-                                :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
-                        </button>
-                    </th>
-                    <!-- Columna para el UUCC -->
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        <button wire:click="sortBy('uucc')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>UUCC</span>
-                            <x-sort-icon
-                                field="uucc"
-                                :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
-                        </button>
-                    </th>
+                    @endforeach
                     @auth
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-center text-xs leading-4uppercase tracking-wider">
-                        Acciones
-                    </th>
+                    <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">Acciones</th>
                     @endauth
                 </tr>
             </thead>
 
-            <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+            <tbody class="divide-y divide-gray-200">
                 @foreach ($materiales as $material)
-                <tr class="hover:bg-gray-50" wire:key="{{ $material->codigo_material }}">
-                    <td class="flex gap-3 px-6 py-4 font-normal">
-                        <div class="text-sm">
-                            <div class="font-medium">{{$material->codigo_material}}</div>
-                        </div>
-                    </td>
+                <tr
+                    class="hover:bg-gray-50 transition-colors"
+                    wire:key="{{ $material->codigo_material }}">
+                    <td class="px-6 py-4 text-sm">{{ $material->codigo_material }}</td>
+                    <td class="px-6 py-4 text-sm">{{ $material->descripcion }}</td>
+                    <td class="px-6 py-4 text-sm">{{ $material->cantidad }}</td>
+                    <td class="px-6 py-4 text-sm">{{ $material->unidad }}</td>
                     <td class="px-6 py-4">
-                        <div class="text-sm">
-                            <div class="font-medium">{{$material->descripcion}}</div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="text-sm">
-                            <div class="font-medium">{{$material->cantidad}}</div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="text-sm">
-                            <div class="font-medium">{{$material->unidad}}</div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="text-sm">
-                            <div class="font-medium">{{$material->uucc}}</div>
-                        </div>
+                        <button
+                            wire:click="mostrarUUCC({{ $material->uucc }})"
+                            class="text-indigo-600 hover:text-indigo-700 transition-colors font-medium">
+                            {{ $material->uucc }}
+                        </button>
                     </td>
                     @auth
                     <td class="px-6 py-4">
-                        <div class="flex justify-end gap-4">
+                        <div class="flex justify-end gap-2">
                             <button
                                 wire:click="$dispatch('openModal', { component: 'material.edit-material', arguments: { codigo_material: '{{ $material->codigo_material }}' }})"
-                                class="text-blue-500 hover:text-blue-700 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
+                                class="p-2 text-indigo-600 hover:bg-indigo-50 rounded-md transition-all"
                                 title="Editar">
-                                <i class="fas fa-edit text-lg"></i>
+                                <i class="fas fa-edit"></i>
                             </button>
                             <button
                                 wire:click="$dispatch('deleteMaterial', { codigo_material: '{{ $material->codigo_material }}'})"
-                                class="text-red-500 hover:text-red-700 ml-2 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
+                                class="p-2 text-red-600 hover:bg-red-50 rounded-md transition-all"
                                 title="Eliminar">
-                                <i class="fas fa-trash text-lg"></i>
+                                <i class="fas fa-trash"></i>
                             </button>
                         </div>
                     </td>
@@ -160,8 +115,65 @@
             </tbody>
         </table>
     </div>
-    <div class="px-6 py-3">{{ $materiales->links(data: ['scrollTo' => false]) }}</div>
-</div>
+
+    <!-- Paginación -->
+    <div class="px-6 py-3 text-gray-600">
+        {{ $materiales->links(data: ['scrollTo' => false]) }}
+    </div>
+
+    <!-- Modal -->
+    <div
+        x-data="{ open: @entangle('modalAbierto') }"
+        x-cloak>
+        <div
+            x-show="open"
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center p-4">
+            <div
+                x-show="open"
+                @click.outside="open = false"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="bg-white rounded-xl border border-gray-200 shadow-2xl w-full max-w-md p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Detalles del UUCC</h2>
+                    <button
+                        @click="open = false"
+                        wire:click="cerrarModal"
+                        class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-3 text-sm text-gray-600">
+                    <p><span class="font-medium text-gray-700">Descripción:</span> {{ $uuccSeleccionado['descripcion'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Unidad:</span> {{ $uuccSeleccionado['unidad'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Duración:</span> {{ $uuccSeleccionado['duracion'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Fase:</span> {{ $uuccSeleccionado['fase'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Norma:</span> {{ $uuccSeleccionado['norma'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Clase Activo:</span> {{ $uuccSeleccionado['clase_activo'] ?? 'N/A' }}</p>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button
+                        @click="open = false"
+                        wire:click="cerrarModal"
+                        class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors shadow-sm">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @script
