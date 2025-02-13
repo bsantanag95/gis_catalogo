@@ -19,10 +19,12 @@ class CatalogoUuccDatatable extends Component
     public function render()
     {
         $catalogouucc = CatalogoUUCC::with(['catalogo', 'uucc_column'])
+            ->whereHas('catalogo') // Asegura que exista la relación catalogo
+            ->whereHas('uucc_column') // Asegura que exista la relación uucc_column
             ->when($this->search, function ($query) {
                 $query->whereHas('catalogo', function ($q) {
                     $q->where('descripcion', 'like', '%' . $this->search . '%');
-                })->orWhereHas('uucc', function ($q) {
+                })->orWhereHas('uucc_column', function ($q) {
                     $q->where('descripcion', 'like', '%' . $this->search . '%');
                 });
             })

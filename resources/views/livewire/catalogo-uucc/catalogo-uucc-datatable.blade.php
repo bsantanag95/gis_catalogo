@@ -1,7 +1,6 @@
 <div>
     <div class="flex flex-col md:flex-row justify-between items-center mb-4 p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
         <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-            <!-- Buscador 
             <div class="relative w-full md:w-80">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                     <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -15,7 +14,6 @@
                     placeholder="Buscar Transacción"
                     class="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
             </div>
-            -->
             @auth
             <div>
                 <button
@@ -98,12 +96,12 @@
                 <tr class="hover:bg-gray-50">
                     <td class="flex gap-3 px-6 py-4 font-normal">
                         <div class="text-sm">
-                            <div class="font-medium">{{$cu->catalogo->descripcion}}</div>
+                            <div class="font-medium">{{$cu->catalogo->descripcion ?? 'N/A' }}</div>
                         </div>
                     </td>
                     <td class="px-6 py-4">
                         <div class="text-sm">
-                            <div class="font-medium">{{$cu->uucc_column->descripcion}}</div>
+                            <div class="font-medium">{{$cu->uucc_column->descripcion ?? 'N/A' }}</div>
                         </div>
                     </td>
                     <td class="px-6 py-4">
