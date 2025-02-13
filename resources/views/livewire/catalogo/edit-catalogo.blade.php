@@ -1,4 +1,4 @@
-<div class="max-w-3xl mx-auto p-6 mt-16 bg-white rounded-xl border border-gray-200 shadow-2xl max-h-[80vh] overflow-y-auto">
+<div class="max-w-3xl mx-auto p-6 bg-white rounded-xl border border-gray-200 shadow-2xl max-h-[80vh] overflow-y-auto">
     <div class="flex justify-between items-center pb-4 mb-6 border-b border-gray-200">
         <h1 class="text-xl font-semibold text-gray-800">Editar Catálogo</h1>
         <button
