@@ -49,33 +49,41 @@
         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
             <thead class="bg-gray-50">
                 <tr>
-                    <!-- Columna para el código -->
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                    <th scope="col" class="px-6 py-4 group relative">
                         <button wire:click="sortBy('codigo_servicio')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Código</span>
+                            class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1">
+                                Código
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="codigo_servicio"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors" />
                         </button>
                     </th>
 
-                    <!-- Columna para la descripción -->
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                    <th scope="col" class="px-6 py-4 group relative">
                         <button wire:click="sortBy('descripcion')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Descripción</span>
+                            class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1">
+                                Descripción
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="descripcion"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors" />
                         </button>
                     </th>
                     @auth
-                    <!-- Columna para las acciones -->
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-center text-xs leading-4uppercase tracking-wider">
-                        Acciones
+                    <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-center group">
+                        <span class="relative inline-block pb-1 text-xs leading-4 uppercase tracking-wider">
+                            Acciones
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:w-full"></span>
+                        </span>
                     </th>
                     @endauth
                 </tr>

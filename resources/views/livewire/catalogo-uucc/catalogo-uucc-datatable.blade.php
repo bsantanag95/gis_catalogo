@@ -48,34 +48,46 @@
         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
             <thead class="bg-gray-50">
                 <tr>
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                    <th scope="col" class="px-6 py-4 group relative">
                         <button wire:click="sortBy('codigo_cat')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Catálogo</span>
+                            class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1">
+                                Catálogo
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="codigo_cat"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors" />
                         </button>
                     </th>
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                    <th scope="col" class="px-6 py-4 group relative">
                         <button wire:click="sortBy('codigo_uucc')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>UUCC</span>
+                            class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1">
+                                UUCC
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="codigo_uucc"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors" />
                         </button>
                     </th>
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        <button wire:click="sortBy('codigo_material')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Cantidad</span>
+                    <th scope="col" class="px-6 py-4 group relative">
+                        <button wire:click="sortBy('cantidad')"
+                            class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1">
+                                Cantidad
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="cantidad"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors" />
                         </button>
                     </th>
                 </tr>

@@ -48,78 +48,94 @@
         <table class="w-full table-auto border-collapse bg-white text-left text-sm text-gray-500">
             <thead class="bg-gray-50">
                 <tr>
-                    <!-- Columna para el código -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
+                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] group relative">
                         <button wire:click="sortBy('codigo')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Código</span>
+                            class="w-full flex items-center justify-between space-x-1 text-left font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1 text-[10px]">
+                                Código
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="codigo"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors w-3 h-3" />
                         </button>
                     </th>
-                    <!-- Columna para la descripción -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
+                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] group relative">
                         <button wire:click="sortBy('descripcion')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Descripción</span>
+                            class="w-full flex items-center justify-between space-x-1 text-left font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1 text-[10px]">
+                                Descripción
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="descripcion"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors w-3 h-3" />
                         </button>
                     </th>
-                    <!-- Columna para tipo catalogo -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
+                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] group relative">
                         <button wire:click="sortBy('tipo_catalogo')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Tipo Catálogo</span>
+                            class="w-full flex items-center justify-between space-x-1 text-left font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1 text-[10px]">
+                                Tipo Catálogo
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="tipo_catalogo"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors w-3 h-3" />
                         </button>
                     </th>
-                    <!-- Columna para objeto eo -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
+                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] group relative">
                         <button wire:click="sortBy('objeto_eo')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Objeto EO</span>
+                            class="w-full flex items-center justify-between space-x-1 text-left font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1 text-[10px]">
+                                Objeto EO
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="objeto_eo"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors w-3 h-3" />
                         </button>
                     </th>
-                    <!-- Columna para el tipo -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
+                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] group relative">
                         <button wire:click="sortBy('tipo')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Tipo</span>
+                            class="w-full flex items-center justify-between space-x-1 text-left font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1 text-[10px]">
+                                Tipo
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="tipo"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors w-3 h-3" />
                         </button>
                     </th>
-
-                    <!-- Columna para el estado -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
+                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] group relative">
                         <button wire:click="sortBy('estado')"
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            <span>Estado</span>
+                            class="w-full flex items-center justify-between space-x-1 text-left font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1 text-[10px]">
+                                Estado
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
                             <x-sort-icon
                                 field="estado"
                                 :sortField="$sortField"
-                                :sortAsc="$sortAsc" />
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors w-3 h-3" />
                         </button>
                     </th>
-                    <!-- Columna para las acciones -->
-                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] text-gray-900">
-                        <span
-                            class="flex items-center space-x-1 bg-gray-50 text-left text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-6 py-4 text-[10px] max-w-[150px] group">
+                        <span class="relative inline-block pb-1 text-[10px] leading-4 font-medium text-gray-500 uppercase tracking-wider">
                             Acciones
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:w-full"></span>
                         </span>
                     </th>
                 </tr>
