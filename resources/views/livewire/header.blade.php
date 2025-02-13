@@ -1,80 +1,50 @@
-<header class="sticky top-0 bg-gray-800 text-white shadow-md px-4 py-2 z-50 flex items-center justify-between min-h-[60px]">
-    <!-- Logo / Branding -->
-    <div class="flex items-center space-x-4">
-        @livewire('sidebar') <!-- Ahora renderiza correctamente -->
-        <span class="text-lg font-semibold tracking-wide">
+<header class="sticky top-0 bg-gray-800 text-white shadow-md px-4 sm:px-6 py-2 z-50 flex items-center justify-between h-16">
+    <!-- Logo y menú hamburguesa -->
+    <div class="flex items-center gap-x-4">
+        @livewire('sidebar')
+        <span class="text-xl font-bold tracking-tight">
             MyApp
         </span>
     </div>
 
-    <!-- Navigation Links (Optional) 
-    <nav class="hidden md:flex space-x-6">
-        <a href="#" class="text-sm font-medium hover:text-gray-300 transition">Home</a>
-        <a href="#" class="text-sm font-medium hover:text-gray-300 transition">Features</a>
-        <a href="#" class="text-sm font-medium hover:text-gray-300 transition">About</a>
-    </nav>-->
-    <!-- User Menu -->
-    <div class="relative flex items-center">
+    <!-- Menú usuario -->
+    <div class="flex items-center gap-x-4">
         @auth
-        <div class="mr-4"></div>
+        <div x-data="{ open: false }" class="relative">
+            <button @click="open = !open" class="flex items-center gap-x-2 group">
+                <img
+                    src="{{ asset('user_avatar.png') }}"
+                    class="w-9 h-9 rounded-full border-2 border-gray-600 hover:border-gray-400 transition-colors"
+                    alt="Avatar usuario">
 
-        <!-- User Dropdown Container -->
-        <div x-data="{ open: false }" class="relative" @keydown.escape="open = false">
-            <!-- Trigger Button -->
-            <button
-                @click="open = !open"
-                aria-label="Menú de usuario"
-                aria-haspopup="true"
-                :aria-expanded="open"
-                class="flex items-center space-x-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 rounded-full">
-                <!-- User Avatar with Fallback -->
-                <div class="relative">
-                    <img
-                        src="{{ asset('user_avatar.png') }}"
-                        alt="Avatar de {{ Auth::user()->username }}"
-                        class="w-8 h-8 rounded-full border-2 border-gray-700 transition-transform duration-200 group-hover:scale-105"
-                        loading="lazy">
-                </div>
-
-                <!-- User Info -->
-                <div class="hidden md:flex items-center space-x-1.5">
-                    <span class="text-sm font-medium truncate max-w-[120px]">
+                <div class="hidden lg:flex items-center gap-x-1.5">
+                    <span class="text-sm font-medium max-w-[140px] truncate">
                         {{ Auth::user()->username }}
                     </span>
-                    <i class="fas fa-chevron-down text-[0.7rem] transition-transform duration-200 ease-out"
-                        :class="open ? 'rotate-180' : 'rotate-0'"></i>
+                    <svg class="w-3 h-3 transform transition-transform" :class="open ? 'rotate-180' : ''" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
                 </div>
             </button>
 
-            <!-- Dropdown Menu -->
-            <div
-                x-show="open"
-                @click.away="open = false"
-                x-collapse
-                class="absolute right-0 mt-2 w-48 origin-top-right bg-gray-800 rounded-md shadow-xl ring-1 ring-gray-900/5 z-50"
-                role="menu">
-                <div class="py-1">
-                    <!-- Logout Form -->
-                    <form method="POST" action="{{ route('logout') }}" class="w-full" role="none">
-                        @csrf
-                        <button
-                            type="submit"
-                            role="menuitem"
-                            class="w-full text-left px-4 py-2.5 text-sm flex items-center space-x-2 hover:bg-gray-700/50 active:bg-gray-700 transition-colors duration-150">
-                            <i class="fas fa-sign-out-alt text-gray-400 w-4 text-center"></i>
-                            <span>Cerrar sesión</span>
-                        </button>
-                    </form>
-                </div>
+            <!-- Dropdown -->
+            <div x-show="open" @click.away="open = false" x-cloak
+                class="absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="w-full px-4 py-3 text-sm flex items-center gap-x-3 hover:bg-gray-700/50 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Cerrar sesión
+                    </button>
+                </form>
             </div>
         </div>
         @endauth
 
         @guest
-        <!-- Login Button -->
-        <a
-            href="/login"
-            class="text-sm font-medium px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 active:bg-gray-500 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300">
+        <a href="/login" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-sm font-medium">
             Iniciar sesión
         </a>
         @endguest

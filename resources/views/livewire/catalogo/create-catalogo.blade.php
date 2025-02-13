@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto mt-4 p-4 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
+<div class="max-w-4xl mx-auto mt-4 pt-6 p-4 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
     <div class="pb-4 border-b border-gray-200 mb-6">
         <h1 class="text-xl font-semibold text-gray-800">Nuevo Catálogo</h1>
     </div>
@@ -42,7 +42,6 @@
             </select>
             @error('objeto_eo') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
-
 
         <!-- Tipo Catálogo -->
         <div>
@@ -136,7 +135,6 @@
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
             @error('cant_uucc') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
-
 
         <!-- Estado -->
         <div class="flex items-center">

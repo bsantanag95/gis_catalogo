@@ -1,18 +1,21 @@
 <div>
-    <div class="flex justify-between items-center mb-4">
-        <!-- Buscador y Botón Crear Nuevo -->
-        <div class="flex items-center space-x-4 mt-4 md:mt-0">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-4 p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+        <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
             <!-- Buscador -->
-            <div class="relative flex items-center">
-                <span class="absolute">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-3 text-gray-400 dark:text-gray-600">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            <div class="relative w-full md:w-80">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
-                </span>
-                <input id="search" wire:model.live.debounce.100ms="search" type="text" placeholder="Buscar servicio" class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                </div>
+                <input
+                    id="search"
+                    wire:model.live.debounce.100ms="search"
+                    type="text"
+                    placeholder="Buscar catálogo"
+                    class="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
             </div>
 
-            <!-- Botón Crear Nuevo -->
             @auth
             <div>
                 <button
@@ -28,8 +31,12 @@
         </div>
 
         <!-- Selector de registros por página -->
-        <div>
-            <select id="perPage" wire:change='update' wire:model="perPage" class="bg-gray-50 border w-16 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <div class="mt-4 md:mt-0 relative">
+            <select
+                id="perPage"
+                wire:change='update'
+                wire:model="perPage"
+                class="bg-white border border-gray-300 text-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block pr-8 pl-3 py-2.5 shadow-sm appearance-none w-20">
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
