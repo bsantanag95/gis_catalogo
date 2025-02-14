@@ -5,8 +5,11 @@ namespace App\Livewire\Detalle;
 use App\Models\CatalogoDetalle;
 use Illuminate\Pagination\Paginator;
 use Livewire\Component;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
+use Masmerise\Toaster\Toaster;
 
 class DetalleDatatable extends Component
 {
@@ -15,6 +18,8 @@ class DetalleDatatable extends Component
     public $search = '';
     public $sortField;
     public $sortAsc = true;
+
+    protected $listeners = ['render' => 'render', 'delete'];
 
     public function render()
     {
@@ -42,6 +47,18 @@ class DetalleDatatable extends Component
             ->paginate($this->perPage);
 
         return view('livewire.detalle.detalle-datatable', compact('detalle'));
+    }
+
+    public function delete($id)
+    {
+        try {
+            $detalle = CatalogoDetalle::where('id', $id)->first();
+
+            $detalle->delete();
+            Toaster::success('El servicio fue eliminado exitosamente');
+        } catch (Exception $e) {
+            Toaster::error('Error: No se pudo eliminar el registro');
+        }
     }
 
 
