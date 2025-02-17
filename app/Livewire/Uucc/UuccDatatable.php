@@ -33,11 +33,17 @@ class UuccDatatable extends Component
                 ->orWhere('descripcion', 'like', '%' . $this->search . '%')
                 ->orWhere('norma', 'like', '%' . $this->search . '%')
                 ->orWhere('clase_activo', 'like', '%' . $this->search . '%');
-        })->when($this->sortField, function ($query) {
-            $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
-        })->paginate($this->perPage);
+        })
+            ->when($this->sortField, function ($query) {
+                $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+            }, function ($query) {
+                $query->orderBy('descripcion', 'asc');
+            })
+            ->paginate($this->perPage);
+
         return view('livewire.uucc.uucc-datatable', compact('uucc'));
     }
+
 
     public  function  update()
     {

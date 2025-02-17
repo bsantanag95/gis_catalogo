@@ -13,18 +13,7 @@
 
     <form wire:submit="create" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Código Servicio -->
-        <div class="space-y-1">
-            <label for="codigo_servicio" class="block text-sm font-medium text-gray-700">Código Servicio</label>
-            <input
-                type="number"
-                min="0"
-                id="codigo_servicio"
-                name="codigo_servicio"
-                wire:model="codigo_servicio"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder-gray-400" />
-            @error('codigo_servicio') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
-        </div>
+
 
         <!-- Descripción -->
         <div class="space-y-1">

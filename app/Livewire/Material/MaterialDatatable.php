@@ -38,10 +38,17 @@ class MaterialDatatable extends Component
     {
         $materiales = UUCCMaterial::where(function ($query) {
             $query->where('codigo_material', 'like', '%' . $this->search . '%')
-                ->orWhere('descripcion', 'like', '%' . $this->search . '%');
-        })->when($this->sortField, function ($query) {
-            $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
-        })->paginate($this->perPage);
+                ->orWhere('descripcion', 'like', '%' . $this->search . '%')
+                ->orWhere('unidad', 'like', '%' . $this->search . '%')
+                ->orWhere('uucc', 'like', '%' . $this->search . '%');
+        })
+            ->when($this->sortField, function ($query) {
+                $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+            }, function ($query) {
+                $query->orderBy('descripcion', 'asc');
+            })
+            ->paginate($this->perPage);
+
         return view('livewire.material.material-datatable', compact('materiales'));
     }
 

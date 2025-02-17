@@ -12,7 +12,6 @@ class CreateServicio extends ModalComponent
     public $codigo_servicio, $descripcion;
 
     public $rules = [
-        'codigo_servicio' => 'required|integer',
         'descripcion' => 'required|string|max:100',
     ];
 
@@ -25,7 +24,6 @@ class CreateServicio extends ModalComponent
     {
         $this->validate();
         UUCCServicio::create([
-            'codigo_servicio' => $this->codigo_servicio,
             'descripcion' => $this->descripcion
         ]);
 
