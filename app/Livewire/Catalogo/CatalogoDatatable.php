@@ -18,6 +18,8 @@ class CatalogoDatatable extends Component
     public $search = '';
     public $sortField;
     public $sortAsc = true;
+    public $openModal = false;
+    public $catalogoSelected = [];
 
     protected $listeners = ['render' => 'render', 'delete'];
 
@@ -40,6 +42,18 @@ class CatalogoDatatable extends Component
             $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
         })->paginate($this->perPage);
         return view('livewire.catalogo.catalogo-datatable', compact('catalogos'));
+    }
+
+    public function viewCatalogo($codigo)
+    {
+        $catalogo = Catalogo::where('codigo', $codigo)->first();
+        $this->catalogoSelected = $catalogo ? $catalogo->toArray() : [];
+        $this->openModal = true;
+    }
+
+    public function closeModal()
+    {
+        $this->openModal = false;
     }
 
     public  function  update()

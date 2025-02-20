@@ -23,6 +23,11 @@ class DetalleDatatable extends Component
 
     public function render()
     {
+        //         select * from GIS_CAT_CATALOGO c
+        // left join GIS_CAT_CATALOGO_UUCC u on c.codigo = u.codigo_cat
+        // left join GIS_CAT_UUCC_MATERIAL um on u.uucc = um.uucc
+        // left join GIS_CAT_UUCC_MATERIAL m on um.codigo_material = m.codigo_material
+        // where c.codigo = 'CANBT003'
         $detalle = CatalogoDetalle::with(['catalogo', 'uucc', 'material', 'servicio'])
             // ->where(function ($query) {
             //     $query->where('codigo_cat', 'like', '%' . $this->search . '%')

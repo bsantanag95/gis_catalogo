@@ -108,11 +108,11 @@
                         <button wire:click="sortBy('tipo')"
                             class="w-full flex items-center justify-between space-x-1 text-left font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
                             <span class="relative pb-1 text-[10px]">
-                                Tipo
+                                CUDN
                                 <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
                             </span>
                             <x-sort-icon
-                                field="tipo"
+                                field="cudn"
                                 :sortField="$sortField"
                                 :sortAsc="$sortAsc"
                                 class="text-gray-400 group-hover:text-indigo-500 transition-colors w-3 h-3" />
@@ -164,9 +164,9 @@
                         </div>
                     </td>
 
-                    <td class="px-6 py-4" title="{{ $catalogo->tipo }}">
+                    <td class="px-6 py-4" title="{{ $catalogo->cudn }}">
                         <div class="text-sm">
-                            <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->tipo}}</div>
+                            <div class="text-xs line-clamp-1 max-w-[150px]">{{$catalogo->cudn}}</div>
                         </div>
                     </td>
 
@@ -182,7 +182,7 @@
                     <td class="px-6 py-4">
                         <div class="flex justify-end gap-1">
                             <button
-                                wire:click="$dispatch('openModal', { component: 'catalogo.view-catalogo', arguments: { codigo: '{{ $catalogo->codigo }}' }})"
+                                wire:click="viewCatalogo('{{ $catalogo->codigo }}')"
                                 class="text-gray-500 hover:text-gray-700 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
                                 title="Ver">
                                 <i class="fas fa-eye"></i>
@@ -216,7 +216,72 @@
         </table>
     </div>
     <div class="px-6 py-3">{{ $catalogos->links(data: ['scrollTo' => false]) }}</div>
-</div>
+
+
+    <!-- Modal -->
+    <div
+        x-data="{ open: @entangle('openModal') }"
+        x-cloak>
+        <div
+            x-show="open"
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center p-4">
+            <div
+                x-show="open"
+                @click.outside="open = false"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="bg-white rounded-xl border border-gray-200 shadow-2xl w-full max-w-md p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="pb-4 border-b border-gray-200 mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Detalle del Catálogo</h2>
+                    </div>
+                    <button
+                        @click="open = false"
+                        wire:click="closeModal"
+                        class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="space-y-3 text-sm text-gray-600">
+                    <p><span class="font-medium text-gray-700">Código:</span> {{ $catalogoSelected['codigo'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Descripción:</span> {{ $catalogoSelected['descripcion'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Objeto EO:</span> {{ $catalogoSelected['objeto_eo'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Tipo Catálogo:</span> {{ $catalogoSelected['tipo_catalogo'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Fases:</span> {{ $catalogoSelected['fases'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Tensión:</span> {{ $catalogoSelected['tension'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Tipo:</span> {{ $catalogoSelected['tipo'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">CUDN:</span> {{ $catalogoSelected['cudn'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Detalle Fase:</span> {{ $catalogoSelected['detalle_fase'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Cantidad UUCC:</span> {{ $catalogoSelected['cant_uucc'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Estado:</span>
+                        {{ isset($catalogoSelected['estado']) ? ($catalogoSelected['estado'] == 1 ? 'Activo' : 'Inactivo') : 'N/A' }}
+                    </p>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button
+                        @click="open = false"
+                        wire:click="closeModal"
+                        class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @script

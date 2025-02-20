@@ -19,15 +19,10 @@ class MaterialDatatable extends Component
     public $search = '';
     public $sortField;
     public $sortAsc = true;
-    public $modalAbierto = false;
-    public $uuccSeleccionado = [];
+    public $openModal = false;
+    public $uuccSelected = [];
 
     protected $listeners = ['render' => 'render', 'delete'];
-
-    public function cerrarModal()
-    {
-        $this->modalAbierto = false;
-    }
 
     public function mount()
     {
@@ -70,11 +65,16 @@ class MaterialDatatable extends Component
         }
     }
 
-    public function mostrarUUCC($codigo)
+    public function viewUucc($codigo)
     {
         $uucc = UUCC::where('codigo_uucc', $codigo)->first();
-        $this->uuccSeleccionado = $uucc ? $uucc->toArray() : [];
-        $this->modalAbierto = true;
+        $this->uuccSelected = $uucc ? $uucc->toArray() : [];
+        $this->openModal = true;
+    }
+
+    public function closeModal()
+    {
+        $this->openModal = false;
     }
 
     public  function  update()

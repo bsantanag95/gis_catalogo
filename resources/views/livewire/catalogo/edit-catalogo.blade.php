@@ -18,8 +18,7 @@
                 type="text"
                 id="codigo"
                 wire:model.defer="catalogo.codigo"
-                disabled
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm bg-gray-100 text-gray-500 cursor-not-allowed"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                 placeholder="Código del catálogo">
         </div>
 

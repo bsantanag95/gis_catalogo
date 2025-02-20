@@ -102,7 +102,7 @@
                     </td>
                     <td class="px-6 py-4">
                         <button
-                            wire:click="mostrarUUCC({{ $material->uucc }})"
+                            wire:click="viewUucc({{ $material->uucc }})"
                             class="text-indigo-600 hover:text-indigo-700 font-medium text-sm">
                             {{ $material->uucc }}
                         </button>
@@ -141,7 +141,7 @@
 
     <!-- Modal UUCC -->
     <div
-        x-data="{ open: @entangle('modalAbierto') }"
+        x-data="{ open: @entangle('openModal') }"
         x-cloak>
         <div
             x-show="open"
@@ -166,7 +166,7 @@
                     <h2 class="text-xl font-semibold text-gray-800">Detalles del UUCC</h2>
                     <button
                         @click="open = false"
-                        wire:click="cerrarModal"
+                        wire:click="closeModal"
                         class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-lg">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -175,18 +175,18 @@
                 </div>
 
                 <div class="space-y-3 text-sm text-gray-600">
-                    <p><span class="font-medium text-gray-700">Descripción:</span> {{ $uuccSeleccionado['descripcion'] ?? 'N/A' }}</p>
-                    <p><span class="font-medium text-gray-700">Unidad:</span> {{ $uuccSeleccionado['unidad'] ?? 'N/A' }}</p>
-                    <p><span class="font-medium text-gray-700">Duración:</span> {{ $uuccSeleccionado['duracion'] ?? 'N/A' }}</p>
-                    <p><span class="font-medium text-gray-700">Fase:</span> {{ $uuccSeleccionado['fase'] ?? 'N/A' }}</p>
-                    <p><span class="font-medium text-gray-700">Norma:</span> {{ $uuccSeleccionado['norma'] ?? 'N/A' }}</p>
-                    <p><span class="font-medium text-gray-700">Clase Activo:</span> {{ $uuccSeleccionado['clase_activo'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Descripción:</span> {{ $uuccSelected['descripcion'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Unidad:</span> {{ $uuccSelected['unidad'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Duración:</span> {{ $uuccSelected['duracion'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Fase:</span> {{ $uuccSelected['fase'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Norma:</span> {{ $uuccSelected['norma'] ?? 'N/A' }}</p>
+                    <p><span class="font-medium text-gray-700">Clase Activo:</span> {{ $uuccSelected['clase_activo'] ?? 'N/A' }}</p>
                 </div>
 
                 <div class="mt-6 flex justify-end">
                     <button
                         @click="open = false"
-                        wire:click="cerrarModal"
+                        wire:click="closeModal"
                         class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all">
                         Cerrar
                     </button>
