@@ -101,11 +101,15 @@
                         <div class="text-sm">{{ $material->unidad }}</div>
                     </td>
                     <td class="px-6 py-4">
-                        <button
-                            wire:click="viewUucc({{ $material->uucc }})"
-                            class="text-indigo-600 hover:text-indigo-700 font-medium text-sm">
-                            {{ $material->uucc }}
-                        </button>
+                        <div class="flex items-center justify-between min-w-[20px]">
+                            <span class="text-sm">{{ $material->uucc }}</span>
+                            <button
+                                wire:click="viewUucc({{ $material->uucc }})"
+                                class="text-gray-500 hover:text-gray-700"
+                                title="Ver detalles de UUCC">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                     </td>
                     @auth
                     <td class="px-6 py-4">
