@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Detalle;
 
+use App\Models\Catalogo;
 use App\Models\CatalogoDetalle;
 use Illuminate\Pagination\Paginator;
 use Livewire\Component;
@@ -18,40 +19,41 @@ class DetalleDatatable extends Component
     public $search = '';
     public $sortField;
     public $sortAsc = true;
+    public $selectedCatalogo = null;
+    public $uuccDetalle = [];
 
     protected $listeners = ['render' => 'render', 'delete'];
 
+    public function openModal($codigoCat)
+    {
+        $this->selectedCatalogo = $codigoCat;
+        $this->uuccDetalle = Catalogo::where('codigo', $codigoCat)
+            ->with('detalle.uucc')
+            ->get()
+            ->flatMap(fn($cat) => $cat->detalle->pluck('uucc'))
+            ->unique()
+            ->values();
+
+        dd($this->uuccDetalle);
+
+        $this->dispatch('openModal', $this->selectedCatalogo);
+    }
+
+
     public function render()
     {
-        //         select * from GIS_CAT_CATALOGO c
-        // left join GIS_CAT_CATALOGO_UUCC u on c.codigo = u.codigo_cat
-        // left join GIS_CAT_UUCC_MATERIAL um on u.uucc = um.uucc
-        // left join GIS_CAT_UUCC_MATERIAL m on um.codigo_material = m.codigo_material
-        // where c.codigo = 'CANBT003'
-        $detalle = CatalogoDetalle::with(['catalogo', 'uucc', 'material', 'servicio'])
-            // ->where(function ($query) {
-            //     $query->where('codigo_cat', 'like', '%' . $this->search . '%')
-            //         ->orWhere('codigo_uucc', 'like', '%' . $this->search . '%')
-            //         ->orWhere('codigo_material', 'like', '%' . $this->search . '%')
-            //         ->orWhere('codigo_servicio', 'like', '%' . $this->search . '%');
-            // })
+        $catalogos = Catalogo::query()
+            ->with('detalle.uucc')
             ->when($this->search, function ($query) {
-                $query->whereHas('catalogo', function ($q) {
-                    $q->where('descripcion', 'like', '%' . $this->search . '%');
-                })->orWhereHas('uucc', function ($q) {
-                    $q->where('descripcion', 'like', '%' . $this->search . '%');
-                })->orWhereHas('material', function ($q) {
-                    $q->where('descripcion', 'like', '%' . $this->search . '%');
-                })->orWhereHas('servicio', function ($q) {
-                    $q->where('descripcion', 'like', '%' . $this->search . '%');
-                });
+                $query->where('codigo', 'like', "%{$this->search}%")
+                    ->orWhere('descripcion', 'like', "%{$this->search}%");
             })
             ->when($this->sortField, function ($query) {
                 $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
             })
             ->paginate($this->perPage);
 
-        return view('livewire.detalle.detalle-datatable', compact('detalle'));
+        return view('livewire.detalle.detalle-datatable', compact('catalogos'));
     }
 
     public function delete($id)

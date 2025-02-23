@@ -1,4 +1,4 @@
-<header class="sticky top-0 bg-gray-800 text-white shadow-md px-4 sm:px-6 py-2 z-50 flex items-center justify-between h-16">
+<header class="sticky top-0 bg-gray-800 text-white shadow-md px-4 sm:px-6 py-2 z-10 flex items-center justify-between h-16">
     <!-- Logo y menú hamburguesa -->
     <div class="flex items-center gap-x-4">
         @livewire('sidebar')

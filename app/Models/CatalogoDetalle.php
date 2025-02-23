@@ -21,6 +21,7 @@ class CatalogoDetalle extends Model
         return $this->belongsTo(UUCC::class, 'codigo_uucc', 'codigo_uucc');
     }
 
+
     public function material()
     {
         return $this->belongsTo(UUCCMaterial::class, 'codigo_material', 'codigo_material');
