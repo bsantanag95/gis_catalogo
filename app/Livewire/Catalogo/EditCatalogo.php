@@ -12,6 +12,8 @@ class EditCatalogo extends ModalComponent
     public $objetoEOOptions = [];
     public $tipoCatalogoOptions = [];
     public $estado;
+    public $uuccEntries = [];
+    public $uuccOptions;
 
     protected $rules = [
         'catalogo.codigo' => 'required',
@@ -25,6 +27,8 @@ class EditCatalogo extends ModalComponent
         'catalogo.detalle_fase' => 'nullable|string|max:50',
         'catalogo.cant_uucc' => 'nullable|integer|min:0|max:9999',
         'catalogo.estado' => 'nullable|integer|min:0|max:1',
+        'uuccEntries.*.uucc' => 'required|exists:GIS_CAT_UUCC,codigo_uucc',
+        'uuccEntries.*.cantidad' => 'required|integer|min:1',
     ];
 
 
@@ -47,6 +51,17 @@ class EditCatalogo extends ModalComponent
         $this->catalogo = Catalogo::where('codigo', $codigo)->firstOrFail();
         $this->estado = $this->catalogo->estado;
         $this->updateTipoCatalogoOptions($this->catalogo->objeto_eo);
+        $this->uuccOptions = \App\Models\UUCC::all();
+        $this->uuccEntries = $this->catalogo->uucc->map(function ($uucc) {
+            return [
+                'uucc' => $uucc->codigo_uucc,
+                'cantidad' => $uucc->pivot->cantidad
+            ];
+        })->toArray();
+
+        if (empty($this->uuccEntries)) {
+            $this->uuccEntries[] = ['uucc' => '', 'cantidad' => 1];
+        }
     }
 
     public function updatedCatalogoObjetoEo($value)
@@ -83,11 +98,31 @@ class EditCatalogo extends ModalComponent
         return view('livewire.catalogo.edit-catalogo');
     }
 
+    public function addUuccEntry()
+    {
+        $this->uuccEntries[] = ['uucc' => '', 'cantidad' => 1];
+    }
+
+    public function removeUuccEntry($index)
+    {
+        unset($this->uuccEntries[$index]);
+        $this->uuccEntries = array_values($this->uuccEntries);
+    }
+
     public function update()
     {
         $this->validate();
         $this->catalogo->estado = $this->estado;
         $this->catalogo->save();
+
+        $uuccData = collect($this->uuccEntries)->mapWithKeys(
+            fn($entry) => [
+                $entry['uucc'] => ['cantidad' => $entry['cantidad']]
+            ]
+        );
+
+        $this->catalogo->uucc()->sync($uuccData);
+
         $this->dispatch('render')->to('Catalogo.CatalogoDatatable');
         Toaster::success('Catalogo actualizado existosamente');
 

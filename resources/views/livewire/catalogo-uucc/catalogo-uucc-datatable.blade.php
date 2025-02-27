@@ -46,11 +46,12 @@
         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
             <thead class="bg-gray-50">
                 <tr>
+                    <!-- Columna Catalogo -->
                     <th scope="col" class="px-6 py-4 group relative">
                         <button wire:click="sortBy('codigo_cat')"
                             class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
                             <span class="relative pb-1">
-                                Catálogo
+                                Catalogo
                                 <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
                             </span>
                             <x-sort-icon
@@ -60,6 +61,8 @@
                                 class="text-gray-400 group-hover:text-indigo-500 transition-colors" />
                         </button>
                     </th>
+
+                    <!-- Columna UUCC -->
                     <th scope="col" class="px-6 py-4 group relative">
                         <button wire:click="sortBy('codigo_uucc')"
                             class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
@@ -74,6 +77,8 @@
                                 class="text-gray-400 group-hover:text-indigo-500 transition-colors" />
                         </button>
                     </th>
+
+                    <!-- Columna Cantidad -->
                     <th scope="col" class="px-6 py-4 group relative">
                         <button wire:click="sortBy('cantidad')"
                             class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
@@ -94,31 +99,49 @@
             <tbody class="divide-y divide-gray-100 border-t border-gray-100">
                 @foreach ($catalogouucc as $cu)
                 <tr class="hover:bg-gray-50">
-                    <td class="flex gap-3 px-6 py-4 font-normal">
-                        <div class="text-sm">
-                            <div class="font-medium">{{$cu->catalogo->descripcion ?? 'N/A' }}</div>
+                    <!-- Celda Catalogo -->
+                    <td class="px-6 py-4">
+                        <div class="text-sm space-y-1">
+                            <div class="font-medium text-gray-900">
+                                {{ $cu->catalogo->codigo ?? 'N/A' }}
+                            </div>
+                            <div class="text-gray-500 text-xs">
+                                {{ $cu->catalogo->descripcion ?? 'Sin descripción' }}
+                            </div>
                         </div>
                     </td>
+
+                    <!-- Celda UUCC -->
                     <td class="px-6 py-4">
-                        <div class="text-sm">
-                            <div class="font-medium">{{$cu->uucc_column->descripcion ?? 'N/A' }}</div>
+                        <div class="text-sm space-y-1">
+                            <div class="font-medium text-gray-900">
+                                {{ $cu->uucc_column->codigo_uucc ?? 'N/A' }}
+                            </div>
+                            <div class="text-gray-500 text-xs">
+                                {{ $cu->uucc_column->descripcion ?? 'Sin descripción' }}
+                            </div>
                         </div>
                     </td>
+
+                    <!-- Celda Cantidad -->
                     <td class="px-6 py-4">
-                        <div class="text-sm">
-                            <div class="font-medium">{{$cu->cantidad}}</div>
+                        <div class="text-sm font-medium text-gray-900">
+                            {{ $cu->cantidad }}
                         </div>
                     </td>
                 </tr>
                 @endforeach
+
                 @if ($catalogouucc->isEmpty())
                 <tr>
-                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">No hay transacciones disponibles.</td>
+                    <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                        No hay registros disponibles.
+                    </td>
                 </tr>
                 @endif
             </tbody>
         </table>
     </div>
+
     <div class="px-6 py-3">{{ $catalogouucc->links(data: ['scrollTo' => false]) }}</div>
-</div>
 </div>
