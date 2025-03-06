@@ -3,6 +3,7 @@
 namespace App\Livewire\Catalogo;
 
 use App\Models\Catalogo;
+use App\Models\Cudn;
 use App\Models\UUCC;
 use LivewireUI\Modal\ModalComponent;
 use Masmerise\Toaster\Toaster;
@@ -13,6 +14,9 @@ class CreateCatalogo extends ModalComponent
     public $objetoEOOptions = [];
     public $uuccEntries = [['uucc' => '', 'cantidad' => 1]];
     public $uuccOptions, $codigo, $descripcion, $tipo_catalogo, $objeto_eo = '', $fases, $tension, $tipo, $cudn, $detalle_fase, $cant_uucc, $estado = 1;
+
+
+    protected $listeners = ['cudnSelected' => 'handleCudnSelected', 'cudnGenerated' => 'handleCudnGenerated'];
 
     protected $rules = [
         'codigo' => 'required|string|max:50|unique:GIS_CAT_CATALOGO,codigo',
@@ -48,6 +52,17 @@ class CreateCatalogo extends ModalComponent
         ];
 
         $this->uuccOptions = UUCC::all();
+    }
+
+    public function handleCudnSelected($group)
+    {
+        $this->cudn = $group;
+    }
+
+    public function handleCudnGenerated($generatedCode)
+    {
+        $this->cudn = $generatedCode;
+        $this->dispatch('closeModal'); // Cierra todos los modales
     }
 
     public function render()

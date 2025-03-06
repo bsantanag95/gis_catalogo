@@ -100,14 +100,23 @@
         </div>
 
         <!-- CUDN -->
-        <div>
+        <div class="relative">
             <label for="cudn" class="block text-sm font-medium text-gray-700">CUDN</label>
-            <input
-                type="text"
-                id="cudn"
-                name="cudn"
-                wire:model="cudn"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+            <div class="flex gap-2">
+                <input
+                    type="text"
+                    id="cudn"
+                    name="cudn"
+                    wire:model="cudn"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200"
+                    readonly>
+                <button
+                    type="button"
+                    wire:click="$dispatch('openModal', { component: 'catalogo.generate-cudn' })"
+                    class="mt-1 px-3 border border-gray-300 rounded-md hover:bg-gray-50">
+                    Buscar
+                </button>
+            </div>
             @error('cudn') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
