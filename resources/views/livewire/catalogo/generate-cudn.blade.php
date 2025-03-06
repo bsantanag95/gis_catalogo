@@ -17,11 +17,12 @@
             Cancelar
         </button>
         <button
+            x-bind:disabled="!$wire.selectedGroup"
             wire:click="$dispatch('openModal', {
                 component: 'cudn.cudn-group-modal',
                 arguments: { grupo: $wire.selectedGroup }
             })"
-            class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed">
             Siguiente
         </button>
     </div>

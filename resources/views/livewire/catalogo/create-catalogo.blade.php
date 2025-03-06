@@ -114,7 +114,7 @@
                     type="button"
                     wire:click="$dispatch('openModal', { component: 'catalogo.generate-cudn' })"
                     class="mt-1 px-3 border border-gray-300 rounded-md hover:bg-gray-50">
-                    Buscar
+                    Generar
                 </button>
             </div>
             @error('cudn') <span class="text-red-600">{{ $message }}</span> @enderror
