@@ -106,14 +106,24 @@
         </div>
 
         <!-- CUDN -->
+        <!-- Reemplazar el input actual del CUDN con este código -->
         <div class="space-y-1">
             <label for="cudn" class="block text-sm font-medium text-gray-700">CUDN</label>
-            <input
-                type="text"
-                id="cudn"
-                wire:model.defer="catalogo.cudn"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                placeholder="CUDN del catálogo">
+            <div class="flex gap-2">
+                <input
+                    type="text"
+                    id="cudn"
+                    wire:model.defer="catalogo.cudn"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                    placeholder="CUDN del catálogo"
+                    readonly>
+                <button
+                    type="button"
+                    wire:click="$dispatch('openModal', { component: 'catalogo.generate-cudn' })"
+                    class="mt-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                    Generar
+                </button>
+            </div>
             @error('catalogo.cudn')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
         </div>
 

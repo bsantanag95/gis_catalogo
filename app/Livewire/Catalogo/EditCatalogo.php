@@ -14,6 +14,9 @@ class EditCatalogo extends ModalComponent
     public $estado;
     public $uuccEntries = [];
     public $uuccOptions;
+    public $selectedGroup;
+
+    protected $listeners = ['cudnGenerated' => 'handleCudnGenerated'];
 
     protected $rules = [
         'catalogo.codigo' => 'required',
@@ -29,6 +32,7 @@ class EditCatalogo extends ModalComponent
         'catalogo.estado' => 'nullable|integer|min:0|max:1',
         'uuccEntries.*.uucc' => 'required|exists:GIS_CAT_UUCC,codigo_uucc',
         'uuccEntries.*.cantidad' => 'required|integer|min:1',
+        'catalogo.cudn' => 'required|string|max:50',
     ];
 
 
@@ -61,6 +65,10 @@ class EditCatalogo extends ModalComponent
 
         if (empty($this->uuccEntries)) {
             $this->uuccEntries[] = ['uucc' => '', 'cantidad' => 1];
+        }
+
+        if ($this->catalogo->cudn) {
+            $this->selectedGroup = substr($this->catalogo->cudn, 0, 1);
         }
     }
 
@@ -127,5 +135,10 @@ class EditCatalogo extends ModalComponent
         Toaster::success('Catalogo actualizado existosamente');
 
         $this->closeModal();
+    }
+
+    public function handleCudnGenerated($generatedCode)
+    {
+        $this->catalogo->cudn = $generatedCode;
     }
 }
