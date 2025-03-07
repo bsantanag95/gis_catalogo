@@ -140,5 +140,6 @@ class EditCatalogo extends ModalComponent
     public function handleCudnGenerated($generatedCode)
     {
         $this->catalogo->cudn = $generatedCode;
+        $this->dispatch('closeModal');
     }
 }
