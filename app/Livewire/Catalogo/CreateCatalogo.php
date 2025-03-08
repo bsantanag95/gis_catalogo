@@ -82,17 +82,21 @@ class CreateCatalogo extends ModalComponent
 
     public function create()
     {
-        $this->validate();
+        try {
+            $this->validate();
 
-        $catalogo = Catalogo::create($this->only('codigo', 'descripcion', 'tipo_catalogo', 'objeto_eo', 'fases', 'tension', 'tipo', 'cudn', 'detalle_fase', 'estado'));
+            $catalogo = Catalogo::create($this->only('codigo', 'descripcion', 'tipo_catalogo', 'objeto_eo', 'fases', 'tension', 'tipo', 'cudn', 'detalle_fase', 'estado'));
 
-        // Guardar relaciones UUCC
-        foreach ($this->uuccEntries as $entry) {
-            $catalogo->uucc()->attach($entry['uucc'], ['cantidad' => $entry['cantidad']]);
+            foreach ($this->uuccEntries as $entry) {
+                $catalogo->uucc()->attach($entry['uucc'], ['cantidad' => $entry['cantidad']]);
+            }
+
+            $this->dispatch('render')->to('Catalogo.CatalogoDatatable');
+
+            Toaster::success('Catálogo creado exitosamente');
+            $this->closeModal();
+        } catch (\Exception $e) {
+            Toaster::error('Ocurrió un error: ' . $e->getMessage());
         }
-
-        $this->dispatch('render')->to('Catalogo.CatalogoDatatable');
-        Toaster::success('Catálogo creado exitosamente');
-        $this->closeModal();
     }
 }

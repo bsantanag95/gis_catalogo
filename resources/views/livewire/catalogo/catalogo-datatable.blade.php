@@ -187,7 +187,6 @@
                                 title="Ver">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            @auth
                             <button
                                 wire:click="$dispatch('openModal', { component: 'catalogo.edit-catalogo', arguments: { codigo: '{{ $catalogo->codigo }}' }})"
                                 class="text-blue-500 hover:text-blue-700 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
@@ -200,7 +199,6 @@
                                 title="Eliminar">
                                 <i class="fas fa-trash text-lg"></i>
                             </button>
-                            @endauth
                         </div>
                     </td>
                 </tr>

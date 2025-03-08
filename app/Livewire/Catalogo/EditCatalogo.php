@@ -3,41 +3,47 @@
 namespace App\Livewire\Catalogo;
 
 use App\Models\Catalogo;
+use Illuminate\Validation\Rule;
 use LivewireUI\Modal\ModalComponent;
 use Masmerise\Toaster\Toaster;
 
 class EditCatalogo extends ModalComponent
 {
     public Catalogo $catalogo;
-    public $objetoEOOptions = [];
-    public $tipoCatalogoOptions = [];
-    public $estado;
-    public $uuccEntries = [];
-    public $uuccOptions;
-    public $selectedGroup;
+
+    public $estado, $originalCodigo, $objetoEOOptions = [], $tipoCatalogoOptions = [], $uuccOptions, $selectedGroup, $uuccEntries = [];
 
     protected $listeners = ['cudnGenerated' => 'handleCudnGenerated'];
 
-    protected $rules = [
-        'catalogo.codigo' => 'required',
-        'catalogo.descripcion' => 'nullable|string|max:100',
-        'catalogo.tipo_catalogo' => 'nullable|string|max:50',
-        'catalogo.objeto_eo' => 'nullable|string|max:50',
-        'catalogo.fases' => 'nullable|integer|min:0',
-        'catalogo.tension' => 'nullable|string|max:50',
-        'catalogo.tipo' => 'nullable|string|max:50',
-        'catalogo.cudn' => 'nullable|string|max:50',
-        'catalogo.detalle_fase' => 'nullable|string|max:50',
-        'catalogo.cant_uucc' => 'nullable|integer|min:0|max:9999',
-        'catalogo.estado' => 'nullable|integer|min:0|max:1',
-        'uuccEntries.*.uucc' => 'required|exists:GIS_CAT_UUCC,codigo_uucc',
-        'uuccEntries.*.cantidad' => 'required|integer|min:1',
-        'catalogo.cudn' => 'required|string|max:50',
-    ];
-
+    protected function rules()
+    {
+        return [
+            'catalogo.codigo' => [
+                'required',
+                'string',
+                'max:50',
+                Rule::unique('GIS_CAT_CATALOGO', 'codigo')
+                    ->ignore($this->originalCodigo, 'codigo') // Usar el código original almacenado
+            ],
+            'catalogo.descripcion' => 'nullable|string|max:100',
+            'catalogo.tipo_catalogo' => 'nullable|string|max:50',
+            'catalogo.objeto_eo' => 'nullable|string|max:50',
+            'catalogo.fases' => 'nullable|integer|min:0',
+            'catalogo.tension' => 'nullable|string|max:50',
+            'catalogo.tipo' => 'nullable|string|max:50',
+            'catalogo.cudn' => 'nullable|string|max:50',
+            'catalogo.detalle_fase' => 'nullable|string|max:50',
+            'catalogo.cant_uucc' => 'nullable|integer|min:0|max:9999',
+            'catalogo.estado' => 'nullable|integer|min:0|max:1',
+            'uuccEntries.*.uucc' => 'required|exists:GIS_CAT_UUCC,codigo_uucc',
+            'uuccEntries.*.cantidad' => 'required|integer|min:1',
+            'catalogo.cudn' => 'required|string|max:50',
+        ];
+    }
 
     public function mount($codigo)
     {
+        $this->originalCodigo = $codigo;
         $this->objetoEOOptions = [
             'Accurate Route',
             'Assembled equipment',
@@ -119,23 +125,32 @@ class EditCatalogo extends ModalComponent
 
     public function update()
     {
-        $this->validate();
-        $this->catalogo->estado = $this->estado;
-        $this->catalogo->save();
+        try {
+            $this->validate();
 
-        $uuccData = collect($this->uuccEntries)->mapWithKeys(
-            fn($entry) => [
-                $entry['uucc'] => ['cantidad' => $entry['cantidad']]
-            ]
-        );
+            // Recuperar el modelo usando el código original
+            $catalogo = Catalogo::where('codigo', $this->originalCodigo)->firstOrFail();
+            $catalogo->fill($this->catalogo->getAttributes());
+            $catalogo->estado = $this->estado;
+            $catalogo->save();
 
-        $this->catalogo->uucc()->sync($uuccData);
+            $uuccData = collect($this->uuccEntries)->mapWithKeys(
+                fn($entry) => [
+                    $entry['uucc'] => ['cantidad' => $entry['cantidad']]
+                ]
+            );
 
-        $this->dispatch('render')->to('Catalogo.CatalogoDatatable');
-        Toaster::success('Catalogo actualizado existosamente');
+            $catalogo->uucc()->sync($uuccData);
 
-        $this->closeModal();
+            $this->dispatch('render')->to('Catalogo.CatalogoDatatable');
+
+            Toaster::success('Catálogo actualizado exitosamente');
+            $this->closeModal();
+        } catch (\Exception $e) {
+            Toaster::error('Ocurrió un error: ' . $e->getMessage());
+        }
     }
+
 
     public function handleCudnGenerated($generatedCode)
     {
