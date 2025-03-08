@@ -5,6 +5,7 @@ namespace App\Livewire\CatalogoUucc;
 use App\Models\Catalogo;
 use App\Models\CatalogoUUCC;
 use App\Models\UUCC;
+use Exception;
 use LivewireUI\Modal\ModalComponent;
 use Masmerise\Toaster\Toaster;
 
@@ -26,21 +27,23 @@ class CreateCatalogoUucc extends ModalComponent
 
     public function create()
     {
-        $validatedData = $this->validate([
-            'codigo_cat' => 'required|string',
-            'uucc' => 'required|integer',
-            'cantidad' => 'nullable|integer|min:0|max:9999'
-        ]);
+        try {
+            $validatedData = $this->validate([
+                'codigo_cat' => 'required|string',
+                'uucc' => 'required|integer',
+                'cantidad' => 'nullable|integer|min:0|max:9999'
+            ]);
 
-        CatalogoUUCC::create([
-            'codigo_cat' => $validatedData['codigo_cat'],
-            'uucc' => $validatedData['uucc'],
-            'cantidad' => $validatedData['cantidad'] ?? null,
-        ]);
+            CatalogoUUCC::create([
+                'codigo_cat' => $validatedData['codigo_cat'],
+                'uucc' => $validatedData['uucc'],
+                'cantidad' => $validatedData['cantidad'] ?? null,
+            ]);
 
-        //$this->dispatch('render')->to('Material.MaterialDatatable');
-        Toaster::success('Transacción registrada existosamente');
-
-        $this->closeModal();
+            Toaster::success('Transacción registrada exitosamente');
+            $this->closeModal();
+        } catch (Exception $e) {
+            Toaster::error('Ocurrió un error: ' . $e->getMessage());
+        }
     }
 }
