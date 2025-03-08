@@ -3,10 +3,9 @@
 namespace App\Livewire\Cudn;
 
 use App\Models\Cudn;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 
-class CudnGroupModal extends ModalComponent
+class GenerateCudn extends ModalComponent
 {
     public $grupo;
     public $fields = [];
@@ -84,6 +83,6 @@ class CudnGroupModal extends ModalComponent
 
     public function render()
     {
-        return view('livewire.cudn.cudn-group-modal');
+        return view('livewire.cudn.generate-cudn');
     }
 }

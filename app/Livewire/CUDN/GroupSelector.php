@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire\Catalogo;
+namespace App\Livewire\Cudn;
 
 use App\Models\Cudn;
 use LivewireUI\Modal\ModalComponent;
 
-class GenerateCudn extends ModalComponent
+class GroupSelector extends ModalComponent
 {
     public $selectedGroup = '';
     public $groups = [];
@@ -29,6 +29,6 @@ class GenerateCudn extends ModalComponent
 
     public function render()
     {
-        return view('livewire.catalogo.generate-cudn');
+        return view('livewire.cudn.group-selector');
     }
 }

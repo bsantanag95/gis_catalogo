@@ -3,7 +3,6 @@
 namespace App\Livewire\Catalogo;
 
 use App\Models\Catalogo;
-use App\Models\Cudn;
 use App\Models\UUCC;
 use LivewireUI\Modal\ModalComponent;
 use Masmerise\Toaster\Toaster;

@@ -119,7 +119,7 @@
                     readonly>
                 <button
                     type="button"
-                    wire:click="$dispatch('openModal', { component: 'catalogo.generate-cudn' })"
+                    wire:click="$dispatch('openModal', { component: 'cudn.group-selector' })"
                     class="mt-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
                     Generar
                 </button>
