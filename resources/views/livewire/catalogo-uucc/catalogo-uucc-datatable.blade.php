@@ -135,7 +135,7 @@
                 @if ($catalogouucc->isEmpty())
                 <tr>
                     <td colspan="3" class="px-6 py-4 text-center text-gray-500">
-                        No hay registros disponibles.
+                        No se encontraron resultados para "{{ $search }}"
                     </td>
                 </tr>
                 @endif

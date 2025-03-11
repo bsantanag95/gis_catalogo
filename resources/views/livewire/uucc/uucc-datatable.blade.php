@@ -218,7 +218,7 @@
                 @if ($uucc->isEmpty())
                 <tr>
                     <td colspan="8" class="px-6 py-4 text-center text-gray-500">
-                        No hay UUCC disponibles.
+                        No se encontraron resultados para "{{ $search }}"
                     </td>
                 </tr>
                 @endif

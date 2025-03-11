@@ -206,7 +206,7 @@
                 @if ($catalogos->isEmpty())
                 <tr>
                     <td colspan="12" class="px-6 py-4 text-center text-gray-500">
-                        No hay catálogos disponibles.
+                        No se encontraron resultados para "{{ $search }}"
                     </td>
                 </tr>
                 @endif
