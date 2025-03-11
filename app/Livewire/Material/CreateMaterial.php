@@ -24,6 +24,7 @@ class CreateMaterial extends ModalComponent
         $this->selectUnidad = ['Jg', 'KG', 'M', 'Pz', 'ROL', 'TR'];
         $this->uuccOptions = UUCC::all();
     }
+
     public function render()
     {
         return view('livewire.material.create-material');

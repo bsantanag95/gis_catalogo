@@ -31,12 +31,13 @@ class MaterialDatatable extends Component
 
     public function render()
     {
-        $materiales = UUCCMaterial::where(function ($query) {
-            $query->where('codigo_material', 'like', '%' . $this->search . '%')
-                ->orWhere('descripcion', 'like', '%' . $this->search . '%')
-                ->orWhere('unidad', 'like', '%' . $this->search . '%')
-                ->orWhere('uucc', 'like', '%' . $this->search . '%');
-        })
+        $materiales = UUCCMaterial::with(['catalogoDetalle', 'uuccRelacion'])
+            ->where(function ($query) {
+                $query->where('codigo_material', 'like', '%' . $this->search . '%')
+                    ->orWhere('descripcion', 'like', '%' . $this->search . '%')
+                    ->orWhere('unidad', 'like', '%' . $this->search . '%')
+                    ->orWhere('uucc', 'like', '%' . $this->search . '%');
+            })
             ->when($this->sortField, function ($query) {
                 $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
             }, function ($query) {
