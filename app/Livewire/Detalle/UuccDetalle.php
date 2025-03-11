@@ -35,6 +35,10 @@ class UuccDetalle extends ModalComponent
             ->unique('codigo_servicio')
             ->values()
             ->toArray();
+
+        if (!$uucc) {
+            abort(404, "UUCC no encontrada");
+        }
     }
 
     public function render()
