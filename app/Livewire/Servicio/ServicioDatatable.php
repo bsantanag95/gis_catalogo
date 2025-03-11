@@ -28,16 +28,18 @@ class ServicioDatatable extends Component
 
     public function render()
     {
-        $servicios = UUCCServicio::where(function ($query) {
-            $query->where('codigo_servicio', 'like', '%' . $this->search . '%')
-                ->orWhere('descripcion', 'like', '%' . $this->search . '%');
-        })
+        $servicios = UUCCServicio::with('catalogoDetalle')
+            ->where(function ($query) {
+                $query->where('codigo_servicio', 'like', '%' . $this->search . '%')
+                    ->orWhere('descripcion', 'like', '%' . $this->search . '%');
+            })
             ->when($this->sortField, function ($query) {
                 $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
             }, function ($query) {
                 $query->orderBy('descripcion', 'asc');
             })
             ->paginate($this->perPage);
+
 
         return view('livewire.servicio.servicio-datatable', compact('servicios'));
     }

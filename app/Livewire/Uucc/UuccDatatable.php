@@ -28,12 +28,13 @@ class UuccDatatable extends Component
 
     public function render()
     {
-        $uucc = UUCC::where(function ($query) {
-            $query->where('codigo_uucc', 'like', '%' . $this->search . '%')
-                ->orWhere('descripcion', 'like', '%' . $this->search . '%')
-                ->orWhere('norma', 'like', '%' . $this->search . '%')
-                ->orWhere('clase_activo', 'like', '%' . $this->search . '%');
-        })
+        $uucc = UUCC::with(['catalogoDetalle', 'catalogos'])
+            ->where(function ($query) {
+                $query->where('codigo_uucc', 'like', '%' . $this->search . '%')
+                    ->orWhere('descripcion', 'like', '%' . $this->search . '%')
+                    ->orWhere('norma', 'like', '%' . $this->search . '%')
+                    ->orWhere('clase_activo', 'like', '%' . $this->search . '%');
+            })
             ->when($this->sortField, function ($query) {
                 $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
             }, function ($query) {

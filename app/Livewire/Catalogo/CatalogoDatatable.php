@@ -30,17 +30,21 @@ class CatalogoDatatable extends Component
 
     public function render()
     {
-        $catalogos = Catalogo::where(function ($query) {
-            $query->where('codigo', 'like', '%' . $this->search . '%')
-                ->orWhere('descripcion', 'like', '%' . $this->search . '%')
-                ->orWhere('tipo_catalogo', 'like', '%' . $this->search . '%')
-                ->orWhere('objeto_eo', 'like', '%' . $this->search . '%')
-                ->orWhere('tension', 'like', '%' . $this->search . '%')
-                ->orWhere('tipo', 'like', '%' . $this->search . '%')
-                ->orWhere('cudn', 'like', '%' . $this->search . '%');
-        })->when($this->sortField, function ($query) {
-            $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
-        })->paginate($this->perPage);
+        $catalogos = Catalogo::with(['detalle', 'uucc'])
+            ->where(function ($query) {
+                $query->where('codigo', 'like', '%' . $this->search . '%')
+                    ->orWhere('descripcion', 'like', '%' . $this->search . '%')
+                    ->orWhere('tipo_catalogo', 'like', '%' . $this->search . '%')
+                    ->orWhere('objeto_eo', 'like', '%' . $this->search . '%')
+                    ->orWhere('tension', 'like', '%' . $this->search . '%')
+                    ->orWhere('tipo', 'like', '%' . $this->search . '%')
+                    ->orWhere('cudn', 'like', '%' . $this->search . '%');
+            })
+            ->when($this->sortField, function ($query) {
+                $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+            })
+            ->paginate($this->perPage);
+
         return view('livewire.catalogo.catalogo-datatable', compact('catalogos'));
     }
 
