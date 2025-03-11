@@ -71,12 +71,12 @@
                 id="fase"
                 name="fase"
                 wire:model="uucc.fase"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white">
-                <option value="" selected>Seleccione una fase</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                x-data="{ open: false }"
+                x-on:click.away="open = false">
+                <option value="">Seleccione una fase</option>
+                <template x-for="fase in [0,1,2,3]" :key="fase">
+                    <option :value="fase" x-text="'Fase ' + fase"></option>
+                </template>
             </select>
             @error('uucc.fase') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
         </div>

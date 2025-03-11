@@ -4,8 +4,10 @@ namespace App\Livewire\Servicio;
 
 use App\Models\UUCCServicio;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -48,18 +50,21 @@ class ServicioDatatable extends Component
     public function delete($codigo_servicio)
     {
         try {
-            DB::table('GIS_CAT_CATALOGO_DETALLE')->where('codigo_servicio', $codigo_servicio)->delete();
+            DB::transaction(function () use ($codigo_servicio) {
+                $servicio = UUCCServicio::findOrFail($codigo_servicio);
 
-            $servicio = UUCCServicio::where('codigo_servicio', $codigo_servicio)->first();
+                $servicio->catalogoDetalle()->delete();
 
-            if ($servicio) {
                 $servicio->delete();
-                Toaster::success('El servicio fue eliminado exitosamente');
-            } else {
-                Toaster::error('Error: El registro no existe');
-            }
+            });
+
+            Toaster::success('Servicio eliminado exitosamente');
+        } catch (ModelNotFoundException $e) {
+            Toaster::error('Error: El servicio no existe');
+            Log::error("Intento de eliminar servicio inexistente: $codigo_servicio");
         } catch (Exception $e) {
-            Toaster::error('Error: No se pudo eliminar el registro');
+            Toaster::error('Error al eliminar el servicio. Por favor intente nuevamente.');
+            Log::error("Error eliminando servicio $codigo_servicio: " . $e->getMessage());
         }
     }
 

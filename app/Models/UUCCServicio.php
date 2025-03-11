@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class UUCCServicio extends Model
 {
@@ -18,11 +20,29 @@ class UUCCServicio extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $lastCode = static::max('codigo_servicio');
-            $newCode = $lastCode ? $lastCode + 1 : 6000000;
-            $model->codigo_servicio = $newCode;
+            $retries = 3;
+
+            do {
+                try {
+                    DB::beginTransaction();
+
+                    $lastCode = static::lockForUpdate()
+                        ->orderBy('codigo_servicio', 'desc')
+                        ->value('codigo_servicio');
+
+                    $model->codigo_servicio = $lastCode ? $lastCode + 1 : 6000000;
+
+                    DB::commit();
+                    break;
+                } catch (Exception $e) {
+                    DB::rollBack();
+                    if (--$retries === 0) throw $e;
+                    usleep(100000);
+                }
+            } while ($retries > 0);
         });
     }
+
 
     public function catalogoDetalle()
     {
