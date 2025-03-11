@@ -34,16 +34,13 @@ class DetalleDatatable extends Component
             ->unique()
             ->values();
 
-        dd($this->uuccDetalle);
-
         $this->dispatch('openModal', $this->selectedCatalogo);
     }
 
 
     public function render()
     {
-        $catalogos = Catalogo::query()
-            ->with('detalle.uucc')
+        $catalogos = Catalogo::with(['detalle.uucc', 'detalle.material', 'detalle.servicio'])
             ->when($this->search, function ($query) {
                 $query->where('codigo', 'like', "%{$this->search}%")
                     ->orWhere('descripcion', 'like', "%{$this->search}%");

@@ -40,18 +40,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($catalogos as $catalogo)
+                @forelse ($catalogos as $catalogo)
                 <tr class="hover:bg-gray-50">
                     <td class="px-6 py-4">{{ $catalogo->codigo }}</td>
                     <td class="px-6 py-4">{{ $catalogo->descripcion }}</td>
                     <td class="px-6 py-4">
-                        <button wire:click="$dispatch('openModal', { component: 'detalle.view-detalle', arguments: { codigoCat: '{{ $catalogo->codigo }}' }})" class="text-gray-500 hover:text-gray-700"
+                        <button wire:click="$dispatch('openModal', { component: 'detalle.view-detalle', arguments: { codigoCat: '{{ $catalogo->codigo }}' }})"
+                            class="text-gray-500 hover:text-gray-700"
                             title="Ver detalles de UUCC">
                             <i class="fas fa-eye"></i>
                         </button>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                        No se encontraron resultados para "{{ $search }}"
+                    </td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
