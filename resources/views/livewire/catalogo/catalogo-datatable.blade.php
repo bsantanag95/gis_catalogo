@@ -16,7 +16,6 @@
                     class="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
             </div>
 
-            @auth
             <div>
                 <button
                     wire:click="$dispatch('openModal', { component: 'catalogo.create-catalogo' })"
@@ -27,7 +26,6 @@
                     Crear Nuevo
                 </button>
             </div>
-            @endauth
         </div>
 
         <!-- Selector de registros por página -->
@@ -238,7 +236,7 @@
                 x-transition:leave="ease-in duration-200"
                 x-transition:leave-start="opacity-100 scale-100"
                 x-transition:leave-end="opacity-0 scale-95"
-                class="bg-white rounded-xl border border-gray-200 shadow-2xl w-full max-w-md p-6">
+                class="bg-white rounded-xl border border-gray-200 shadow-2xl w-7xl w-full max-w-2xl p-6">
                 <div class="flex justify-between items-center mb-4">
                     <div class="pb-4 border-b border-gray-200 mb-4">
                         <h2 class="text-xl font-semibold text-gray-800">Detalle del Catálogo</h2>

@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 space-y-4">
+<div class="bg-white rounded-lg p-6 max-w-2xl w-full space-y-4">
     <h3 class="text-lg font-semibold mb-4">Configuración para Grupo {{ $grupo }}</h3>
 
     @foreach($fields as $correlativo => $field)

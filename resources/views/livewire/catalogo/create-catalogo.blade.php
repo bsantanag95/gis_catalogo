@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto mt-4 pt-6 p-4 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
+<div class="w-full max-w-2xl mx-auto mt-4 pt-6 p-4 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
     <div class="pb-4 border-b border-gray-200 mb-6">
         <h1 class="text-xl font-semibold text-gray-800">Nuevo Catálogo</h1>
     </div>

@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+<div class="bg-white rounded-lg p-6 max-w-md w-full">
     <h3 class="text-lg font-semibold mb-4">Seleccionar Grupo</h3>
 
     <select
