@@ -103,17 +103,19 @@
                     <td class="px-6 py-4">
                         <div class="flex items-center justify-between min-w-[20px]">
                             <span class="text-sm">{{ $material->uucc }}</span>
+                            @if($material->uucc)
                             <button
                                 wire:click="viewUucc({{ $material->uucc }})"
                                 class="text-gray-500 hover:text-gray-700"
                                 title="Ver detalles de UUCC">
                                 <i class="fas fa-eye"></i>
                             </button>
+                            @endif
                         </div>
                     </td>
                     @auth
                     <td class="px-6 py-4">
-                        <div class="flex justify-end gap-4">
+                        <div class="flex justify-end space-x-2">
                             <button
                                 wire:click="$dispatch('openModal', { component: 'material.edit-material', arguments: { codigo_material: '{{ $material->codigo_material }}' }})"
                                 class="text-blue-500 hover:text-blue-700 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"

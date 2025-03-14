@@ -19,9 +19,10 @@
                 type="number"
                 id="codigo_uucc"
                 name="codigo_uucc"
+                required
                 wire:model.defer="uucc.codigo_uucc"
-                disabled
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm bg-gray-100 text-gray-500 cursor-not-allowed focus:ring-0" />
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder-gray-400" />
+            @error('uucc.codigo_uucc') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
         </div>
 
         <!-- Descripción -->

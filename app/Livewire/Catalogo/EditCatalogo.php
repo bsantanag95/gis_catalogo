@@ -23,7 +23,7 @@ class EditCatalogo extends ModalComponent
                 'string',
                 'max:50',
                 Rule::unique('GIS_CAT_CATALOGO', 'codigo')
-                    ->ignore($this->originalCodigo, 'codigo') // Usar el código original almacenado
+                    ->ignore($this->originalCodigo, 'codigo')
             ],
             'catalogo.descripcion' => 'nullable|string|max:100',
             'catalogo.tipo_catalogo' => 'nullable|string|max:50',
@@ -131,6 +131,7 @@ class EditCatalogo extends ModalComponent
             // Recuperar el modelo usando el código original
             $catalogo = Catalogo::where('codigo', $this->originalCodigo)->firstOrFail();
             $catalogo->fill($this->catalogo->getAttributes());
+
             $catalogo->estado = $this->estado;
             $catalogo->save();
 

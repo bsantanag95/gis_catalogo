@@ -12,7 +12,7 @@ class CreateMaterial extends ModalComponent
     public $codigo_material, $descripcion, $cantidad, $unidad, $uucc, $selectUnidad = [], $uuccOptions = [];
 
     protected $rules = [
-        'codigo_material' => 'required|string|max:100',
+        'codigo_material' => 'required|string|max:100|unique:GIS_CAT_UUCC_MATERIAL,codigo_material',
         'descripcion'     => 'nullable|string|max:100',
         'cantidad'        => 'nullable|numeric|min:0|max:9999',
         'unidad'          => 'nullable|string|max:50',
