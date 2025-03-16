@@ -30,6 +30,7 @@
             </select>
         </div>
     </div>
+
     <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md">
         <table class="w-full bg-white text-sm text-left text-gray-500">
             <thead class="bg-gray-50">
@@ -37,6 +38,7 @@
                     <th class="px-6 py-4">Código</th>
                     <th class="px-6 py-4">Descripción</th>
                     <th class="px-6 py-4">UUCC</th>
+                    <th class="px-6 py-4">Acciones</th> <!-- Nueva columna para acciones -->
                 </tr>
             </thead>
             <tbody>
@@ -51,10 +53,17 @@
                             <i class="fas fa-eye"></i>
                         </button>
                     </td>
+                    <td class="px-6 py-4">
+                        <button wire:click="$dispatch('openModal', { component: 'detalle.manage-uucc', arguments: { codigoCat: '{{ $catalogo->codigo }}' }})"
+                            class="text-blue-500 hover:text-blue-700 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
+                            title="Editar">
+                            <i class="fas fa-edit text-lg"></i>
+                        </button>
+                    </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                    <td colspan="4" class="px-6 py-4 text-center text-gray-500">
                         No se encontraron resultados para "{{ $search }}"
                     </td>
                 </tr>
@@ -62,8 +71,8 @@
             </tbody>
         </table>
     </div>
-    <div class="px-6 py-3">{{ $catalogos->links(data: ['scrollTo' => false]) }}</div>
 
+    <div class="px-6 py-3">{{ $catalogos->links(data: ['scrollTo' => false]) }}</div>
 </div>
 
 @script
@@ -76,12 +85,12 @@
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Si, elimínalo"
+            confirmButtonText: "Sí, elimínalo"
         }).then((result) => {
             if (result.isConfirmed) {
                 Livewire.dispatch('delete', id)
             }
         });
-    })
+    });
 </script>
 @endscript

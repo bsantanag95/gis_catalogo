@@ -21,16 +21,19 @@ class ViewDetalle extends ModalComponent
 
         $this->uuccDetalle = $catalogo->detalle
             ->pluck('uucc')
+            ->filter()
             ->unique('codigo_uucc')
             ->values();
 
         $this->materiales = $catalogo->detalle
             ->pluck('material')
+            ->filter()
             ->unique('codigo_material')
             ->values();
 
         $this->servicios = $catalogo->detalle
             ->pluck('servicio')
+            ->filter()
             ->unique('codigo_servicio')
             ->values();
     }

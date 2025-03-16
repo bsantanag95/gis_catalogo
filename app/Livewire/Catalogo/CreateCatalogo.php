@@ -77,7 +77,7 @@ class CreateCatalogo extends ModalComponent
     public function removeUuccEntry($index)
     {
         unset($this->uuccEntries[$index]);
-        $this->uuccEntries = array_values($this->uuccEntries); // Reindexar array
+        $this->uuccEntries = array_values($this->uuccEntries);
     }
 
     public function create()

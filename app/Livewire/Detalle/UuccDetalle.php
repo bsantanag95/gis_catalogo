@@ -20,26 +20,29 @@ class UuccDetalle extends ModalComponent
     public function loadData()
     {
         $uucc = UUCC::with([
-            'catalogoDetalle.material',  // Relación corregida
+            'catalogoDetalle.material',
             'catalogoDetalle.servicio'
         ])->find($this->codigoUucc);
-
-        $this->materiales = $uucc->catalogoDetalle
-            ->pluck('material')
-            ->unique('codigo_material')
-            ->values()
-            ->toArray();
-
-        $this->servicios = $uucc->catalogoDetalle
-            ->pluck('servicio')
-            ->unique('codigo_servicio')
-            ->values()
-            ->toArray();
 
         if (!$uucc) {
             abort(404, "UUCC no encontrada");
         }
+
+        $this->materiales = optional($uucc->catalogoDetalle)
+            ->pluck('material')
+            ->filter()
+            ->unique('codigo_material')
+            ->values()
+            ->toArray();
+
+        $this->servicios = optional($uucc->catalogoDetalle)
+            ->pluck('servicio')
+            ->filter()
+            ->unique('codigo_servicio')
+            ->values()
+            ->toArray();
     }
+
 
     public function render()
     {
