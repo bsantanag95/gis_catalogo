@@ -42,9 +42,4 @@ class ViewDetalle extends ModalComponent
     {
         return view('livewire.detalle.view-detalle');
     }
-
-    public static function modalMaxWidth(): string
-    {
-        return '3xl';
-    }
 }

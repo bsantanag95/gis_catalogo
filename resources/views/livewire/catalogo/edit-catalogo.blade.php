@@ -1,4 +1,4 @@
-<div class="max-w-3xl mx-auto p-6 bg-white rounded-xl border border-gray-200 shadow-2xl max-h-[80vh] overflow-y-auto">
+<div class="w-full max-w-full mx-auto mt-4 pt-6 p-4 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
     <div class="flex justify-between items-center pb-4 mb-6 border-b border-gray-200">
         <h1 class="text-xl font-semibold text-gray-800">Editar Catálogo</h1>
         <button
@@ -105,9 +105,20 @@
             @error('catalogo.tipo')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
         </div>
 
-        <!-- CUDN -->
-        <!-- Reemplazar el input actual del CUDN con este código -->
+        <!-- Detalle Fase -->
         <div class="space-y-1">
+            <label for="detalle_fase" class="block text-sm font-medium text-gray-700">Detalle Fase</label>
+            <input
+                type="text"
+                id="detalle_fase"
+                wire:model.defer="catalogo.detalle_fase"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                placeholder="Detalle fase del catálogo">
+            @error('catalogo.detalle_fase')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
+        </div>
+
+        <!-- CUDN -->
+        <div class="space-y-1 md:col-span-2">
             <label for="cudn" class="block text-sm font-medium text-gray-700">CUDN</label>
             <div class="flex gap-2">
                 <input
@@ -125,32 +136,6 @@
                 </button>
             </div>
             @error('catalogo.cudn')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-        </div>
-
-        <!-- Detalle Fase -->
-        <div class="space-y-1">
-            <label for="detalle_fase" class="block text-sm font-medium text-gray-700">Detalle Fase</label>
-            <input
-                type="text"
-                id="detalle_fase"
-                wire:model.defer="catalogo.detalle_fase"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                placeholder="Detalle fase del catálogo">
-            @error('catalogo.detalle_fase')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-        </div>
-
-        <!-- Cantidad UUCC -->
-        <div class="space-y-1">
-            <label for="cant_uucc" class="block text-sm font-medium text-gray-700">Cantidad UUCC</label>
-            <input
-                type="number"
-                id="cant_uucc"
-                wire:model.defer="catalogo.cant_uucc"
-                min="0"
-                onkeydown="if(event.key === 'e' || event.key === 'E' || event.key === '-') event.preventDefault();"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                placeholder="Cantidad UUCC">
-            @error('catalogo.cant_uucc')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
         </div>
 
         <!-- Sección UUCC -->

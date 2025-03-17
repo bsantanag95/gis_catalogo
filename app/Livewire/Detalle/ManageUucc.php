@@ -189,9 +189,4 @@ class ManageUucc extends ModalComponent
             'serviciosDisponibles' => $serviciosDisponibles
         ]);
     }
-
-    public static function modalMaxWidth(): string
-    {
-        return '4xl';
-    }
 }

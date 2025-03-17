@@ -12,7 +12,7 @@ class CreateCatalogo extends ModalComponent
 {
     public $objetoEOOptions = [];
     public $uuccEntries = [['uucc' => '', 'cantidad' => 1]];
-    public $uuccOptions, $codigo, $descripcion, $tipo_catalogo, $objeto_eo = '', $fases, $tension, $tipo, $cudn, $detalle_fase, $cant_uucc, $estado = 1;
+    public $uuccOptions, $codigo, $descripcion, $tipo_catalogo, $objeto_eo = '', $fases, $tension, $tipo, $cudn, $detalle_fase, $estado = 1;
 
 
     protected $listeners = ['cudnSelected' => 'handleCudnSelected', 'cudnGenerated' => 'handleCudnGenerated'];
@@ -27,7 +27,6 @@ class CreateCatalogo extends ModalComponent
         'tipo' => 'nullable|string|max:50',
         'cudn' => 'nullable|string|max:50',
         'detalle_fase' => 'nullable|string|max:50',
-        'cant_uucc' => 'nullable|integer|min:0|max:9999',
         'estado' => 'nullable|integer|min:0|max:1',
         'uuccEntries.*.uucc' => 'required|exists:GIS_CAT_UUCC,codigo_uucc',
         'uuccEntries.*.cantidad' => 'required|integer|min:1',
@@ -85,7 +84,22 @@ class CreateCatalogo extends ModalComponent
         try {
             $this->validate();
 
-            $catalogo = Catalogo::create($this->only('codigo', 'descripcion', 'tipo_catalogo', 'objeto_eo', 'fases', 'tension', 'tipo', 'cudn', 'detalle_fase', 'estado'));
+            //$cant_uucc = collect($this->uuccEntries)->sum('cantidad');
+            $cant_uucc = array_sum(array_column($this->uuccEntries, 'cantidad'));
+
+            $catalogo = Catalogo::create([
+                'codigo' => $this->codigo,
+                'descripcion' => $this->descripcion,
+                'tipo_catalogo' => $this->tipo_catalogo,
+                'objeto_eo' => $this->objeto_eo,
+                'fases' => $this->fases,
+                'tension' => $this->tension,
+                'tipo' => $this->tipo,
+                'cudn' => $this->cudn,
+                'detalle_fase' => $this->detalle_fase,
+                'cant_uucc' => $cant_uucc,
+                'estado' => $this->estado,
+            ]);
 
             foreach ($this->uuccEntries as $entry) {
                 $catalogo->uucc()->attach($entry['uucc'], ['cantidad' => $entry['cantidad']]);

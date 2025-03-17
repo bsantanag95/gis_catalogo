@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg shadow-xl overflow-hidden w-full max-w-2xl">
+<div class="bg-white rounded-lg shadow-xl overflow-hidden">
     <!-- Header -->
     <div class="bg-blue-800 px-6 py-4">
         <h2 class="text-xl font-bold text-white">Detalle de {{ $codigoCat }}</h2>

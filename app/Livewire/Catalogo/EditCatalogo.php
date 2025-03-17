@@ -128,11 +128,15 @@ class EditCatalogo extends ModalComponent
         try {
             $this->validate();
 
-            // Recuperar el modelo usando el código original
-            $catalogo = Catalogo::where('codigo', $this->originalCodigo)->firstOrFail();
-            $catalogo->fill($this->catalogo->getAttributes());
+            $cant_uucc = array_sum(array_column($this->uuccEntries, 'cantidad'));
 
-            $catalogo->estado = $this->estado;
+            $catalogo = Catalogo::where('codigo', $this->originalCodigo)->firstOrFail();
+            $catalogo->fill([
+                ...$this->catalogo->getAttributes(),
+                'cant_uucc' => $cant_uucc,
+                'estado' => $this->estado
+            ]);
+
             $catalogo->save();
 
             $uuccData = collect($this->uuccEntries)->mapWithKeys(

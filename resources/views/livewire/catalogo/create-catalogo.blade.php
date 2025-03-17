@@ -1,4 +1,4 @@
-<div class="w-full max-w-2xl mx-auto mt-4 pt-6 p-4 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
+<div class="w-full max-w-full mx-auto mt-4 pt-6 p-4 bg-white shadow-md rounded-lg max-h-[80vh] overflow-y-auto">
     <div class="pb-4 border-b border-gray-200 mb-6">
         <h1 class="text-xl font-semibold text-gray-800">Nuevo Catálogo</h1>
     </div>
@@ -99,8 +99,20 @@
             @error('tipo') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
+        <!-- Detalle Fase -->
+        <div>
+            <label for="detalle_fase" class="block text-sm font-medium text-gray-700">Detalle Fase</label>
+            <input
+                type="text"
+                id="detalle_fase"
+                name="detalle_fase"
+                wire:model="detalle_fase"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
+            @error('detalle_fase') <span class="text-red-600">{{ $message }}</span> @enderror
+        </div>
+
         <!-- CUDN -->
-        <div class="relative">
+        <div class="space-y-1 md:col-span-2">
             <label for="cudn" class="block text-sm font-medium text-gray-700">CUDN</label>
             <div class="flex gap-2">
                 <input
@@ -119,33 +131,7 @@
             </div>
             @error('cudn') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
-
-        <!-- Detalle Fase -->
-        <div>
-            <label for="detalle_fase" class="block text-sm font-medium text-gray-700">Detalle Fase</label>
-            <input
-                type="text"
-                id="detalle_fase"
-                name="detalle_fase"
-                wire:model="detalle_fase"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('detalle_fase') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <!-- Cantidad UUCC -->
-        <div>
-            <label for="cant_uucc" class="block text-sm font-medium text-gray-700">Cantidad UUCC</label>
-            <input
-                type="number"
-                id="cant_uucc"
-                name="cant_uucc"
-                wire:model="cant_uucc"
-                min="0"
-                onkeydown="if(event.key === 'e' || event.key === 'E' || event.key === '-') event.preventDefault();"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-200" />
-            @error('cant_uucc') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
+        <!--UUCC-->
         <div class="md:col-span-2">
             <div class="space-y-6">
                 <div class="flex items-center justify-between pb-2 border-b border-gray-200">

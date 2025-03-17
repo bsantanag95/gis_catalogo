@@ -21,13 +21,13 @@
         </header>
 
         <ul class="mt-4 px-2 space-y-1">
-            <li>
+            <!-- <li>
                 <a href="#"
                     class="flex items-center px-4 py-3 text-gray-300 text-sm font-medium rounded-md transition-all duration-200 hover:bg-gray-700/50 hover:text-white group">
                     <i class="fas fa-qrcode mr-3 text-gray-400 group-hover:text-white"></i>
                     Dashboard
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a href="/catalogo"
                     class="flex items-center px-4 py-3 text-gray-300 text-sm font-medium rounded-md transition-all duration-200 hover:bg-gray-700/50 hover:text-white group">
@@ -68,7 +68,7 @@
                     class="flex items-center justify-between px-4 py-3 text-gray-300 text-sm font-medium rounded-md transition-all duration-200 hover:bg-gray-700/50 hover:text-white group">
                     <span class="flex items-center">
                         <i class="fas fa-handshake mr-3 text-gray-400 group-hover:text-white"></i>
-                        Transacciones
+                        Detalles
                     </span>
                     <i class="fas fa-chevron-right text-xs transition-transform duration-200 group-hover:rotate-90"></i>
                 </a>
