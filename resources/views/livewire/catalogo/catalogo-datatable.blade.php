@@ -265,6 +265,20 @@
                     <p><span class="font-medium text-gray-700">Estado:</span>
                         {{ isset($catalogoSelected['estado']) ? ($catalogoSelected['estado'] == 1 ? 'Activo' : 'Inactivo') : 'N/A' }}
                     </p>
+                    <div class="mt-4">
+                        <h3 class="text-sm font-semibold text-gray-700">UUCC Asociados:</h3>
+                        <ul class="mt-2 space-y-1">
+                            @if(!empty($catalogoSelected['uucc']))
+                            @foreach($catalogoSelected['uucc'] as $uucc)
+                            <li class="text-gray-600 text-sm bg-gray-100 px-2 py-1 rounded">
+                                {{ $uucc['codigo_uucc'] }} - {{$uucc['descripcion'] ?? 'Sin nombre' }}
+                            </li>
+                            @endforeach
+                            @else
+                            <p class="text-gray-500 text-sm">No hay UUCC asociados.</p>
+                            @endif
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="mt-6 flex justify-end">

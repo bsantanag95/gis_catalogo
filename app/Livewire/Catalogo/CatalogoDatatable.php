@@ -50,7 +50,7 @@ class CatalogoDatatable extends Component
 
     public function viewCatalogo($codigo)
     {
-        $catalogo = Catalogo::where('codigo', $codigo)->first();
+        $catalogo = Catalogo::with('uucc')->where('codigo', $codigo)->first();
         $this->catalogoSelected = $catalogo ? $catalogo->toArray() : [];
         $this->openModal = true;
     }
