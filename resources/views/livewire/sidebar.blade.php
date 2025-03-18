@@ -12,7 +12,7 @@
     <div :class="{ '-left-72': !open, 'left-0': open }"
         class="fixed top-0 h-full w-72 bg-gray-800 shadow-lg border-r border-gray-700 transition-all duration-300 ease-in-out z-40">
         <header class="bg-gray-900 text-white text-lg font-semibold tracking-wide py-4 px-6 flex items-center justify-between">
-            <span>App</span>
+            <span>Menú</span>
             <!-- Cruz para cerrar el sidebar -->
             <label for="check"
                 class="cursor-pointer p-1 rounded-md hover:bg-gray-700/50 transition-colors">

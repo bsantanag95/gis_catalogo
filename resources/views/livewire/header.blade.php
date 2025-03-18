@@ -3,7 +3,7 @@
     <div class="flex items-center gap-x-4">
         @livewire('sidebar')
         <span class="text-xl font-bold tracking-tight">
-            MyApp
+            Catálogo
         </span>
     </div>
 
