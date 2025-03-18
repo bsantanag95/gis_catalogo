@@ -11,7 +11,7 @@
                     id="search"
                     wire:model.live.debounce.100ms="search"
                     type="text"
-                    placeholder="Buscar Transacción"
+                    placeholder="Buscar catálogo UUCC"
                     class="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
             </div>
             <div>
