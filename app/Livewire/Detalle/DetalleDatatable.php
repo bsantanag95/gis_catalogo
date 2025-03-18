@@ -7,7 +7,6 @@ use App\Models\CatalogoDetalle;
 use Illuminate\Pagination\Paginator;
 use Livewire\Component;
 use Exception;
-use Illuminate\Support\Facades\DB;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Masmerise\Toaster\Toaster;

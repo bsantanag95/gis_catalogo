@@ -35,10 +35,44 @@
         <table class="w-full bg-white text-sm text-left text-gray-500">
             <thead class="bg-gray-50">
                 <tr>
-                    <th class="px-6 py-4">Código</th>
-                    <th class="px-6 py-4">Descripción</th>
-                    <th class="px-6 py-4">UUCC</th>
-                    <th class="px-6 py-4">Acciones</th> <!-- Nueva columna para acciones -->
+                    <th scope="col" class="px-6 py-4 group relative">
+                        <button wire:click="sortBy('codigo')"
+                            class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1">
+                                Código
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
+                            <x-sort-icon
+                                field="codigo"
+                                :sortField="$sortField"
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors" />
+                        </button>
+                    </th>
+                    <th scope="col" class="px-6 py-4 group relative">
+                        <button wire:click="sortBy('descripcion')"
+                            class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1">
+                                Descripcion
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
+                            <x-sort-icon
+                                field="descripcion"
+                                :sortField="$sortField"
+                                :sortAsc="$sortAsc"
+                                class="text-gray-400 group-hover:text-indigo-500 transition-colors" />
+                        </button>
+                    </th>
+                    <th scope="col" class="px-6 py-4 group relative">
+                        <button
+                            class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
+                            <span class="relative pb-1">
+                                UUCC
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
+                        </button>
+                    </th>
+                    @auth<th class="px-6 py-4">Acciones</th>@endauth
                 </tr>
             </thead>
             <tbody>
@@ -53,6 +87,7 @@
                             <i class="fas fa-eye"></i>
                         </button>
                     </td>
+                    @auth
                     <td class="px-6 py-4">
                         <button wire:click="$dispatch('openModal', { component: 'detalle.manage-uucc', arguments: { codigoCat: '{{ $catalogo->codigo }}' }})"
                             class="text-blue-500 hover:text-blue-700 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
@@ -60,6 +95,7 @@
                             <i class="fas fa-edit text-lg"></i>
                         </button>
                     </td>
+                    @endauth
                 </tr>
                 @empty
                 <tr>
