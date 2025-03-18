@@ -14,8 +14,8 @@
                     placeholder="Buscar Transacción"
                     class="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
             </div>
-            @auth
             <div>
+                @auth
                 <button
                     wire:click="$dispatch('openModal', { component: 'catalogo-uucc.create-catalogo-uucc' })"
                     class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-md border border-gray-300 shadow-sm hover:bg-gray-50 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600">
@@ -24,8 +24,8 @@
                     </svg>
                     Crear Nuevo
                 </button>
+                @endauth
             </div>
-            @endauth
         </div>
 
         <!-- Selector de registros por página -->
@@ -64,14 +64,14 @@
 
                     <!-- Columna UUCC -->
                     <th scope="col" class="px-6 py-4 group relative">
-                        <button wire:click="sortBy('codigo_uucc')"
+                        <button wire:click="sortBy('uucc')"
                             class="w-full flex items-center justify-between space-x-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider transition-all duration-200 hover:text-indigo-600">
                             <span class="relative pb-1">
                                 UUCC
                                 <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
                             </span>
                             <x-sort-icon
-                                field="codigo_uucc"
+                                field="uucc"
                                 :sortField="$sortField"
                                 :sortAsc="$sortAsc"
                                 class="text-gray-400 group-hover:text-indigo-500 transition-colors" />

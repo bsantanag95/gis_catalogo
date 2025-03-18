@@ -22,7 +22,7 @@
                 class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 bg-white appearance-none pr-10">
                 <option value="" disabled selected>Seleccionar Catálogo</option>
                 @foreach($catalogoOptions as $cat)
-                <option value="{{ $cat->codigo }}">{{ $cat->descripcion }}</option>
+                <option value="{{ $cat->codigo }}">{{$cat->codigo}} - {{ $cat->descripcion }}</option>
                 @endforeach
             </select>
             @error('codigo_cat') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror

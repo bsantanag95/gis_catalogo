@@ -37,9 +37,16 @@ class CreateCatalogoUucc extends ModalComponent
             CatalogoUUCC::create([
                 'codigo_cat' => $validatedData['codigo_cat'],
                 'uucc' => $validatedData['uucc'],
-                'cantidad' => $validatedData['cantidad'] ?? null,
+                'cantidad' => $validatedData['cantidad'] ?? 0,
             ]);
 
+            $catalogo = Catalogo::find($validatedData['codigo_cat']);
+            if ($catalogo) {
+                $catalogo->cant_uucc += $this->cantidad;
+                $catalogo->save();
+            }
+
+            $this->dispatch('render')->to('CatalogoUucc.CatalogoUuccDatatable');
             Toaster::success('Transacción registrada exitosamente');
             $this->closeModal();
         } catch (Exception $e) {

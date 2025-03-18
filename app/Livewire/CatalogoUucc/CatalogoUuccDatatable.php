@@ -16,6 +16,8 @@ class CatalogoUuccDatatable extends Component
     public $sortField;
     public $sortAsc = true;
 
+    protected $listeners = ['render' => 'render'];
+
     public function render()
     {
         $catalogouucc = CatalogoUUCC::with(['catalogo', 'uucc_column'])
