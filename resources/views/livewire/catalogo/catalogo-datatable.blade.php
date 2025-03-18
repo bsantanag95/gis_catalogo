@@ -17,6 +17,7 @@
             </div>
 
             <div>
+                @auth
                 <button
                     wire:click="$dispatch('openModal', { component: 'catalogo.create-catalogo' })"
                     class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-md border border-gray-300 shadow-sm hover:bg-gray-50 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600">
@@ -25,6 +26,7 @@
                     </svg>
                     Crear Nuevo
                 </button>
+                @endauth
             </div>
         </div>
 
@@ -185,6 +187,7 @@
                                 title="Ver">
                                 <i class="fas fa-eye"></i>
                             </button>
+                            @auth
                             <button
                                 wire:click="$dispatch('openModal', { component: 'catalogo.edit-catalogo', arguments: { codigo: '{{ $catalogo->codigo }}' }})"
                                 class="text-blue-500 hover:text-blue-700 cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200"
@@ -197,6 +200,7 @@
                                 title="Eliminar">
                                 <i class="fas fa-trash text-lg"></i>
                             </button>
+                            @endauth
                         </div>
                     </td>
                 </tr>
